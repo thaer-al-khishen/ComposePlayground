@@ -19,7 +19,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.composeplayground.youtube.base.*
 import com.example.composeplayground.youtube.part_12_navigation.ComplexNavigation
+import com.example.composeplayground.youtube.part_12_navigation.LoginScreen
+import com.example.composeplayground.youtube.part_12_navigation.NavGraphs
 import com.example.composeplayground.youtube.part_12_navigation.Screen
+import com.ramcosta.composedestinations.DestinationsNavHost
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.delay
 
 var COMPLEX_OBJECT = "Complex_object"
@@ -32,7 +36,8 @@ class MainActivity : BaseComposeActivity() {
             Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
 //                com.example.composeplayground.youtube.part_13_animated_splash_screen.Navigation()
 //                com.example.composeplayground.youtube.part_12_navigation.Navigation()
-                ComplexNavigation()
+//                ComplexNavigation()
+                DestinationsNavHost(navGraph = NavGraphs.root)
             }
         }
     }
