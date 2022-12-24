@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Compose Playground</string>
+    <string name="title_activity_rows_columns_basic_sizing">RowsColumnsBasicSizingActivity</string>
+    <string name="title_activity_modifiers">ModifiersActivity</string>
+    <string name="title_activity_image_card">ImageCardActivity</string>
+    <string name="title_activity_styling_text">StylingTextActivity</string>
+    <string name="title_activity_state">StateActivity</string>
+    <string name="title_activity_textfields_buttons">TextfieldsButtonsActivity</string>
+    <string name="title_activity_lists">ListsActivity</string>
+    <string name="title_activity_constraint_layouts">ConstraintLayoutsActivity</string>
+    <string name="title_activity_base_compose">BaseComposeActivity</string>
+    <string name="title_activity_effect_handlers">EffectHandlersActivity</string>
+    <string name="title_activity_remember_coroutine_scope">RememberCoroutineScopeActivity</string>
+    <string name="title_activity_simple_animations">SimpleAnimationsActivity</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+</resources>
