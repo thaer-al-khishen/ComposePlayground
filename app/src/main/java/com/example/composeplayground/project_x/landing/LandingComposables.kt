@@ -15,12 +15,12 @@ import com.example.composeplayground.project_x.SimpleScreenContent
 import com.example.composeplayground.project_x.home.details.DetailsScreen
 
 @Composable
-fun NavController.SignUp() {
+fun SignUp() {
     SimpleScreenContent(name = LandingScreen.SignUp.route) {}
 }
 
 @Composable
-fun NavController.Forgot() {
+fun Forgot() {
     SimpleScreenContent(name = LandingScreen.Forgot.route) {}
 }
 

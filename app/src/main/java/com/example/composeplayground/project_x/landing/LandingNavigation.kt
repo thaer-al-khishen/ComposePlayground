@@ -30,10 +30,10 @@ fun NavGraphBuilder.landingNavGraph(navController: NavHostController) {
             HomeScreen()
         }
         composable(route = LandingScreen.SignUp.route) {
-            navController.SignUp()
+            SignUp()
         }
         composable(route = LandingScreen.Forgot.route) {
-            navController.Forgot()
+            Forgot()
         }
     }
 }
