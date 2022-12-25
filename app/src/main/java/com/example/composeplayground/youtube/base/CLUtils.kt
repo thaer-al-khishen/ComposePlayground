@@ -47,6 +47,14 @@ fun Pair<ConstraintSetScope, ConstrainedLayoutReference>.topToTopOf(targetRefere
     }
 }
 
+fun ConstrainScope.topToTopOf(targetReference: ConstrainedLayoutReference) {
+    this.top.linkTo(targetReference.top)
+}
+
+fun ConstrainScope.topToTopOfParent() {
+    this.top.linkTo(parent.top)
+}
+
 fun Pair<ConstraintSetScope, ConstrainedLayoutReference>.topToTopOfParent() {
     val constraintSetScope = this.first
     val constraintLayoutReference = this.second

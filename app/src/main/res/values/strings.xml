@@ -14,4 +14,10 @@
     <string name="title_activity_simple_animations">SimpleAnimationsActivity</string>
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
     <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_activity_bottom_nav">BottomNavActivity</string>
+    <string name="title_activity_destinations_bottom_nav">DestinationsBottomNavActivity</string>
+
+    <string name="greeting">Greeting</string>
+    <string name="feed">Feed</string>
+    <string name="news">News</string>
 </resources>

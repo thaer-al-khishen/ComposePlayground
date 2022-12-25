@@ -29,40 +29,112 @@ class ConstraintLayoutsActivity : BaseComposeActivity() {
         setContent {
 
             val constraints = ConstraintSet {
-                val greenBox = createRefFor("greenbox")
+//                val greenBox = createRefFor("greenbox")
+                val greenBox = createSmartRefFor("greenbox")
                 val redBox = createSmartRefFor("redBox")
 
-                constrain(greenBox) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                    width = Dimension.value(100.dp)
-                    height = Dimension.value(100.dp)
+//                constrain(greenBox) {
+//                    top.linkTo(parent.top)
+//                    start.linkTo(parent.start)
+//                    width = Dimension.value(100.dp)
+//                    height = Dimension.value(100.dp)
+//                }
+
+                greenBox.apply {
+                    height(Dimension.value(100.dp))
+                    width(Dimension.value(100.dp))
+                    topToTopOfParent()
+                    startToStartOfParent()
                 }
 
                 redBox.apply {
                     height(Dimension.value(200.dp))
                     width(Dimension.fillToConstraints)
-                    topToBottomOf(greenBox)
-                    startToEndOf(greenBox)
+                    topToBottomOf(greenBox.second)
+                    startToEndOf(greenBox.second)
                     endToEndOfParent()
                 }
 
             }
 
-            ConstraintLayout(constraintSet = constraints, modifier = Modifier.fillMaxSize()) {
+//            ConstraintLayout(constraintSet = constraints, modifier = Modifier.fillMaxSize()) {
+//                Box(
+//                    modifier = Modifier
+//                        .background(Color.Green)
+//                        .layoutId("greenbox")
+//                )
+//                Box(
+//                    modifier = Modifier
+//                        .background(Color.Red)
+//                        .layoutId("redBox")
+//                )
+//            }
+
+            ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+                val (greenbox, redBox) = createRefs()
                 Box(
                     modifier = Modifier
                         .background(Color.Green)
-                        .layoutId("greenbox")
+                        .constrainAs(greenbox) {
+                            start.linkTo(parent.start)
+//                            top.linkTo(parent.top)
+                            topToTopOfParent()
+                            height = Dimension.value(100.dp)
+                            width = Dimension.value(100.dp)
+                        }
                 )
                 Box(
                     modifier = Modifier
                         .background(Color.Red)
-                        .layoutId("redBox")
+                        .constrainAs(redBox) {
+                            start.linkTo(greenbox.end)
+                            end.linkTo(parent.end)
+                            top.linkTo(greenbox.bottom)
+                            height = Dimension.value(100.dp)
+                            width = Dimension.fillToConstraints
+                        }
                 )
             }
 
         }
+    }
+}
+
+
+@Composable
+fun ConstraintLayoutView() {
+    val constraints = ConstraintSet {
+        val greenBox = createRefFor("greenbox")
+        val redBox = createSmartRefFor("redBox")
+
+        constrain(greenBox) {
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+            width = Dimension.value(100.dp)
+            height = Dimension.value(100.dp)
+        }
+
+        redBox.apply {
+            height(Dimension.value(200.dp))
+            width(Dimension.fillToConstraints)
+            topToBottomOf(greenBox)
+            startToEndOf(greenBox)
+            endToEndOfParent()
+        }
+
+    }
+
+    ConstraintLayout(constraintSet = constraints, modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .background(Color.Green)
+                .layoutId("greenbox")
+        )
+        Box(
+            modifier = Modifier
+                .background(Color.Red)
+                .layoutId("redBox")
+        )
     }
 }
 

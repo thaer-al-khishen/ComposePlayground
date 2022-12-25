@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import com.example.composeplayground.youtube.part_12_navigation.destinations.LoginScreenDestination
 import com.example.composeplayground.youtube.part_12_navigation.destinations.PostScreenDestination
 import com.example.composeplayground.youtube.part_12_navigation.destinations.ProfileScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination

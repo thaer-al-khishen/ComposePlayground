@@ -6,12 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.constraintlayout.compose.*
 
 open class BaseComposeActivity : ComponentActivity() {
 
-    protected var composables: ArrayList<Composable> = ArrayList()
+    protected var composables: ArrayList<@Composable () -> Unit> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +29,30 @@ open class BaseComposeActivity : ComponentActivity() {
 //    @Composable
 //    fun ConstraintSet.CreateConstraintLayout() =
 //        ConstraintLayout(constraintSet = this, modifier = Modifier.fillMaxSize()) {
-////            for (composable in composables) {
-////                composable
-////            }
+//            for (composable in composables) {
+//                composable
+//            }
 //            composables.clone()
 //        }
+
+    fun Pair<ConstraintSetScope, ConstrainedLayoutReference>.assignComposable(composable: @Composable () -> Unit) {
+        composables.add((composable))
+    }
+
+    @Composable
+    fun ConstraintSet.ExtractComposables() {
+        ConstraintLayout(constraintSet = this, modifier = Modifier.fillMaxSize()) {
+            for (composable in composables) {
+                composable.invoke()
+            }
+        }
+    }
+
+    @Composable
+    fun ExtractComposables() {
+        for (composable in composables) {
+            composable.invoke()
+        }
+    }
 
 }

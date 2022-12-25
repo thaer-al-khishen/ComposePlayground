@@ -5,25 +5,31 @@ import android.view.animation.OvershootInterpolator
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.*
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.composeplayground.project_x.root.RootNavigationGraph
 import com.example.composeplayground.youtube.base.*
 import com.example.composeplayground.youtube.part_12_navigation.ComplexNavigation
-import com.example.composeplayground.youtube.part_12_navigation.LoginScreen
-import com.example.composeplayground.youtube.part_12_navigation.NavGraphs
 import com.example.composeplayground.youtube.part_12_navigation.Screen
-import com.ramcosta.composedestinations.DestinationsNavHost
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.example.composeplayground.youtube.part_9_constraint_layouts.*
 import kotlinx.coroutines.delay
 
 var COMPLEX_OBJECT = "Complex_object"
@@ -33,11 +39,9 @@ class MainActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController = rememberNavController()
             Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
-//                com.example.composeplayground.youtube.part_13_animated_splash_screen.Navigation()
-//                com.example.composeplayground.youtube.part_12_navigation.Navigation()
-//                ComplexNavigation()
-                DestinationsNavHost(navGraph = NavGraphs.root)
+                RootNavigationGraph(navController = navController)
             }
         }
     }
