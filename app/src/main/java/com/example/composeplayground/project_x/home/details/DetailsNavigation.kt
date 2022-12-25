@@ -12,11 +12,18 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
         startDestination = DetailsScreen.Information.route
     ) {
         composable(route = DetailsScreen.Information.route) {
-            navController.DetailsInformation()
+            DetailsInformation(onInformationClicked = {
+                navController.navigate(DetailsScreen.Overview.route)
+            })
         }
 
         composable(route = DetailsScreen.Overview.route) {
-            navController.DetailsOverview()
+            DetailsOverview(onOverviewClicked = {
+                navController.popBackStack(
+                    route = DetailsScreen.Information.route,
+                    inclusive = false
+                )
+            })
         }
     }
 }

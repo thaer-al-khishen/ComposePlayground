@@ -38,11 +38,11 @@ fun BottomBar(navController: NavHostController) {
 }
 
 @Composable
-fun NavController.Home() {
+fun Home(onDetailsClicked: () -> Unit) {
     SimpleScreenContent(
         name = BottomBarScreen.Home.route,
         onClick = {
-            this.navigate(Graph.DETAILS)
+            onDetailsClicked.invoke()
         }
     )
 }
@@ -51,7 +51,7 @@ fun NavController.Home() {
 fun Profile() {
     SimpleScreenContent(
         name = BottomBarScreen.Profile.route,
-        onClick = { }
+        onClick = {}
     )
 }
 

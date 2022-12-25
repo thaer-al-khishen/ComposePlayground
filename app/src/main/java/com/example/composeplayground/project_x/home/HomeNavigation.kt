@@ -26,7 +26,9 @@ fun HomeNavGraph(navController: NavHostController) {
         startDestination = BottomBarScreen.Home.route
     ) {
         composable(route = BottomBarScreen.Home.route) {
-            navController.Home()
+            Home(onDetailsClicked = {
+                navController.navigate(Graph.DETAILS)
+            })
         }
         composable(route = BottomBarScreen.Profile.route) {
             Profile()

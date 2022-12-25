@@ -5,18 +5,15 @@ import androidx.navigation.NavController
 import com.example.composeplayground.project_x.SimpleScreenContent
 
 @Composable
-fun NavController.DetailsInformation() {
+fun DetailsInformation(onInformationClicked: () -> Unit) {
     SimpleScreenContent(name = DetailsScreen.Information.route) {
-        this.navigate(DetailsScreen.Overview.route)
+        onInformationClicked.invoke()
     }
 }
 
 @Composable
-fun NavController.DetailsOverview() {
+fun DetailsOverview(onOverviewClicked: () -> Unit) {
     SimpleScreenContent(name = DetailsScreen.Overview.route) {
-        this.popBackStack(
-            route = DetailsScreen.Information.route,
-            inclusive = false
-        )
+        onOverviewClicked.invoke()
     }
 }
