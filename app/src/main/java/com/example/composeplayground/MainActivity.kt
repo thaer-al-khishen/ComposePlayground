@@ -26,6 +26,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.composeplayground.project_x.root.RootNavigationGraph
+import com.example.composeplayground.single_events_lib.SingleEventScreen
 import com.example.composeplayground.youtube.base.*
 import com.example.composeplayground.youtube.part_12_navigation.ComplexNavigation
 import com.example.composeplayground.youtube.part_12_navigation.Screen
@@ -41,7 +42,8 @@ class MainActivity : BaseComposeActivity() {
         setContent {
             val navController = rememberNavController()
             Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
-                RootNavigationGraph(navController = navController)
+//                RootNavigationGraph(navController = navController)
+                SingleEventScreen()
             }
         }
     }
