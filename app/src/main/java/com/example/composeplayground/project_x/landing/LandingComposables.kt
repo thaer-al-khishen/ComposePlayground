@@ -1,5 +1,6 @@
 package com.example.composeplayground.project_x.landing
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,11 +8,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.composeplayground.ScreenViewModel
 import com.example.composeplayground.project_x.SimpleScreenContent
+import com.example.composeplayground.project_x.collectAsStateLifecycleAware
 import com.example.composeplayground.project_x.home.details.DetailsScreen
 
 @Composable
@@ -28,8 +35,13 @@ fun Forgot() {
 fun LoginScreen(
     onLoginClick: () -> Unit,
     onSignUpClick: () -> Unit,
-    onForgotClick: () -> Unit
+    onForgotClick: () -> Unit,
+    screenViewModel: ScreenViewModel = viewModel()
 ) {
+//    val screenState = screenViewModel.uiState
+    val screenState = screenViewModel.uiState.collectAsStateLifecycleAware()
+    Log.d("TutorialTest","---> counter update: ${screenState.value.accountNumber}")
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -49,7 +61,7 @@ fun LoginScreen(
         )
         Text(
             modifier = Modifier.clickable { onForgotClick() },
-            text = "Forgot Password",
+            text = screenState.value.accountNumber,
             fontSize = MaterialTheme.typography.body1.fontSize,
             fontWeight = FontWeight.Medium
         )
