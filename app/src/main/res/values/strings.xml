@@ -22,4 +22,5 @@
     <string name="news">News</string>
     <string name="title_activity_single_event">SingleEventActivity</string>
     <string name="title_activity_animated_cpactivity">AnimatedCPActivity</string>
+    <string name="title_activity_music_knob">MusicKnobActivity</string>
 </resources>

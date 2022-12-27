@@ -31,6 +31,7 @@ import com.example.composeplayground.youtube.base.*
 import com.example.composeplayground.youtube.part_12_navigation.ComplexNavigation
 import com.example.composeplayground.youtube.part_12_navigation.Screen
 import com.example.composeplayground.youtube.part_15_animated_circular_progress.CircularProgressBar
+import com.example.composeplayground.youtube.part_16_music_knob.MusicKnobScreen
 import com.example.composeplayground.youtube.part_9_constraint_layouts.*
 import kotlinx.coroutines.delay
 
@@ -45,9 +46,10 @@ class MainActivity : BaseComposeActivity() {
             Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
 //                RootNavigationGraph(navController = navController)
 //                SingleEventScreen()
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    CircularProgressBar(percentage = 0.8f, number = 100)
-                }
+//                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+//                    CircularProgressBar(percentage = 0.8f, number = 100)
+//                }
+                MusicKnobScreen()
             }
         }
     }
