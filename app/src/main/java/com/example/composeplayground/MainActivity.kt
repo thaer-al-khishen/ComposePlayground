@@ -30,6 +30,7 @@ import com.example.composeplayground.single_events_lib.SingleEventScreen
 import com.example.composeplayground.youtube.base.*
 import com.example.composeplayground.youtube.part_12_navigation.ComplexNavigation
 import com.example.composeplayground.youtube.part_12_navigation.Screen
+import com.example.composeplayground.youtube.part_15_animated_circular_progress.CircularProgressBar
 import com.example.composeplayground.youtube.part_9_constraint_layouts.*
 import kotlinx.coroutines.delay
 
@@ -43,7 +44,10 @@ class MainActivity : BaseComposeActivity() {
             val navController = rememberNavController()
             Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
 //                RootNavigationGraph(navController = navController)
-                SingleEventScreen()
+//                SingleEventScreen()
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressBar(percentage = 0.8f, number = 100)
+                }
             }
         }
     }
@@ -89,4 +93,9 @@ fun SplashScreen(navController: NavController) {
             modifier = Modifier.scale(scale.value)
         )
     }
+}
+
+@Composable
+fun Test() {
+    
 }
