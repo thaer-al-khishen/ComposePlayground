@@ -32,8 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.composeplayground.youtube.part_12_navigation.LoginScreen
-import com.example.composeplayground.youtube.part_12_navigation.NavGraphs
+//import com.example.composeplayground.youtube.part_12_navigation.LoginScreen
+//import com.example.composeplayground.youtube.part_12_navigation.NavGraphs
 import com.ramcosta.composedestinations.DestinationsNavHost
 
 class BottomNavActivity : ComponentActivity() {

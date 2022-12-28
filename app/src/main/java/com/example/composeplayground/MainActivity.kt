@@ -35,6 +35,9 @@ import com.example.composeplayground.youtube.part_16_music_knob.MusicKnobScreen
 import com.example.composeplayground.youtube.part_17_timer.Timer
 import com.example.composeplayground.youtube.part_18_animated_dropdown.DropDown
 import com.example.composeplayground.youtube.part_19_multi_select.MultiSelectList
+import com.example.composeplayground.youtube.part_20_request_permissions.RequestPermissionsScreen
+import com.example.composeplayground.youtube.part_21_clean_theming.spacing
+//import com.example.composeplayground.youtube.part_20_request_permissions.RequestPermissionsScreen
 import com.example.composeplayground.youtube.part_9_constraint_layouts.*
 import kotlinx.coroutines.delay
 
@@ -46,9 +49,10 @@ class MainActivity : BaseComposeActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
+            Surface(color = Color.White, modifier = Modifier.fillMaxSize().padding(MaterialTheme.spacing.default)) {
 //                RootNavigationGraph(navController = navController)
-                MultiSelectList()
+//                MultiSelectList()
+                RequestPermissionsScreen()
             }
         }
     }

@@ -67,9 +67,16 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10'
 
     implementation 'io.github.raamcosta.compose-destinations:core:1.1.2-beta'
-    ksp 'io.github.raamcosta.compose-destinations:ksp:1.1.2-beta'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
+//    ksp 'io.github.raamcosta.compose-destinations:ksp:1.1.2-beta'
+
+    //EventEffect
     implementation 'com.github.leonard-palm:compose-state-events:1.1.0'
+
+    implementation("com.google.accompanist:accompanist-permissions:0.23.1")
 
     def lifecycle_version = "2.6.0-alpha01"
 

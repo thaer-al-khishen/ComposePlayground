@@ -21,6 +21,7 @@ class ModifiersActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            MaterialTheme
             Column(
                 modifier = Modifier
                     .background(Color.Green)
