@@ -33,6 +33,7 @@ import com.example.composeplayground.youtube.part_12_navigation.Screen
 import com.example.composeplayground.youtube.part_15_animated_circular_progress.CircularProgressBar
 import com.example.composeplayground.youtube.part_16_music_knob.MusicKnobScreen
 import com.example.composeplayground.youtube.part_17_timer.Timer
+import com.example.composeplayground.youtube.part_18_animated_dropdown.DropDown
 import com.example.composeplayground.youtube.part_9_constraint_layouts.*
 import kotlinx.coroutines.delay
 
@@ -47,16 +48,15 @@ class MainActivity : BaseComposeActivity() {
             Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
 //                RootNavigationGraph(navController = navController)
                 Surface(
-                    color = Color(0xFF101010),
-                    modifier = Modifier.fillMaxSize()
+                    color = Color(0xFF101010)
                 ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Timer(
-                            totalTime = 100L * 1000L,
-                            handleColor = Color.Green,
-                            inactiveBarColor = Color.DarkGray,
-                            activeBarColor = Color(0xFF37B900),
-                            modifier = Modifier.size(200.dp)
+                    DropDown(text = "Hello World!", modifier = Modifier.padding(15.dp)) {
+                        Text(
+                            text = "This is now revealed!",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(100.dp)
+                                .background(Color.Green)
                         )
                     }
                 }

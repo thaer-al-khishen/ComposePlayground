@@ -24,4 +24,6 @@
     <string name="title_activity_animated_cpactivity">AnimatedCPActivity</string>
     <string name="title_activity_music_knob">MusicKnobActivity</string>
     <string name="title_activity_timer">TimerActivity</string>
+    <string name="title_activity_animated_dropdown">AnimatedDropdownActivity</string>
+    <string name="title_activity_multi_select">MultiSelectActivity</string>
 </resources>
