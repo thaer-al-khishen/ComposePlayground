@@ -34,6 +34,7 @@ import com.example.composeplayground.youtube.part_15_animated_circular_progress.
 import com.example.composeplayground.youtube.part_16_music_knob.MusicKnobScreen
 import com.example.composeplayground.youtube.part_17_timer.Timer
 import com.example.composeplayground.youtube.part_18_animated_dropdown.DropDown
+import com.example.composeplayground.youtube.part_19_multi_select.MultiSelectList
 import com.example.composeplayground.youtube.part_9_constraint_layouts.*
 import kotlinx.coroutines.delay
 
@@ -47,19 +48,7 @@ class MainActivity : BaseComposeActivity() {
             val navController = rememberNavController()
             Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
 //                RootNavigationGraph(navController = navController)
-                Surface(
-                    color = Color(0xFF101010)
-                ) {
-                    DropDown(text = "Hello World!", modifier = Modifier.padding(15.dp)) {
-                        Text(
-                            text = "This is now revealed!",
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(100.dp)
-                                .background(Color.Green)
-                        )
-                    }
-                }
+                MultiSelectList()
             }
         }
     }
