@@ -53,7 +53,10 @@ class MainActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
             val navController = rememberNavController()
+            val apiKey = BuildConfig.API_KEY
+
             Surface(color = Color.White, modifier = Modifier
                 .fillMaxSize()
                 .padding(MaterialTheme.spacing.default)) {
