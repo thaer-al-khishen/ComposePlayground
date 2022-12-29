@@ -17,6 +17,11 @@
         android:theme="@style/Theme.ComposePlayground"
         tools:targetApi="31">
         <activity
+            android:name=".youtube.part_24_bottom_sheets.BottomSheetActivity"
+            android:exported="false"
+            android:label="@string/title_activity_bottom_sheet"
+            android:theme="@style/Theme.ComposePlayground" />
+        <activity
             android:name=".youtube.part_23_pagination.PaginationActivity"
             android:exported="false"
             android:label="@string/title_activity_pagination"
