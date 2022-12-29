@@ -5,45 +5,24 @@ import android.view.animation.OvershootInterpolator
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.*
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.composeplayground.project_x.root.RootNavigationGraph
-import com.example.composeplayground.single_events_lib.SingleEventScreen
 import com.example.composeplayground.youtube.base.*
-import com.example.composeplayground.youtube.part_12_navigation.ComplexNavigation
 import com.example.composeplayground.youtube.part_12_navigation.Screen
-import com.example.composeplayground.youtube.part_15_animated_circular_progress.CircularProgressBar
-import com.example.composeplayground.youtube.part_16_music_knob.MusicKnobScreen
-import com.example.composeplayground.youtube.part_17_timer.Timer
-import com.example.composeplayground.youtube.part_18_animated_dropdown.DropDown
-import com.example.composeplayground.youtube.part_19_multi_select.MultiSelectList
-import com.example.composeplayground.youtube.part_20_request_permissions.RequestPermissionsScreen
 import com.example.composeplayground.youtube.part_21_clean_theming.spacing
-import com.example.composeplayground.youtube.part_22_support_screen_sizes.ScreenAwareComposable
 import com.example.composeplayground.youtube.part_23_pagination.PaginatedScreen
-import com.example.composeplayground.youtube.part_24_bottom_sheets.BottomSheetScreen
-import com.example.composeplayground.youtube.part_25_navigation_drawer.NavigationDrawerScreen
-import com.example.composeplayground.youtube.part_26_lazy_grid.LazyVerticalGridScreen
+import com.example.composeplayground.youtube.base.SynchronizedLock
 //import com.example.composeplayground.youtube.part_20_request_permissions.RequestPermissionsScreen
-import com.example.composeplayground.youtube.part_9_constraint_layouts.*
 import kotlinx.coroutines.delay
 
 var COMPLEX_OBJECT = "Complex_object"
@@ -61,9 +40,10 @@ class MainActivity : BaseComposeActivity() {
                 .fillMaxSize()
                 .padding(MaterialTheme.spacing.default)) {
 //                RootNavigationGraph(navController = navController)
-//                NavigationDrawerScreen()
-                LazyVerticalGridScreen()
+                PaginatedScreen(SynchronizedLock())
             }
+
+
         }
     }
 }

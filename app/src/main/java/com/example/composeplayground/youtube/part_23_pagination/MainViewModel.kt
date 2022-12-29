@@ -1,5 +1,6 @@
 package com.example.composeplayground.youtube.part_23_pagination
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -42,6 +43,7 @@ class MainViewModel: ViewModel() {
     fun loadNextItems() {
         viewModelScope.launch {
             paginator.loadNextItems()
+//            Log.d("ThaerOutput", "Launched load next items call")
         }
     }
 }
