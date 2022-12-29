@@ -41,6 +41,7 @@ import com.example.composeplayground.youtube.part_22_support_screen_sizes.Screen
 import com.example.composeplayground.youtube.part_23_pagination.PaginatedScreen
 import com.example.composeplayground.youtube.part_24_bottom_sheets.BottomSheetScreen
 import com.example.composeplayground.youtube.part_25_navigation_drawer.NavigationDrawerScreen
+import com.example.composeplayground.youtube.part_26_lazy_grid.LazyVerticalGridScreen
 //import com.example.composeplayground.youtube.part_20_request_permissions.RequestPermissionsScreen
 import com.example.composeplayground.youtube.part_9_constraint_layouts.*
 import kotlinx.coroutines.delay
@@ -57,7 +58,8 @@ class MainActivity : BaseComposeActivity() {
                 .fillMaxSize()
                 .padding(MaterialTheme.spacing.default)) {
 //                RootNavigationGraph(navController = navController)
-                NavigationDrawerScreen()
+//                NavigationDrawerScreen()
+                LazyVerticalGridScreen()
             }
         }
     }
@@ -103,9 +105,4 @@ fun SplashScreen(navController: NavController) {
             modifier = Modifier.scale(scale.value)
         )
     }
-}
-
-@Composable
-fun Test() {
-    
 }

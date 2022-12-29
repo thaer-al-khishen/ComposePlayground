@@ -17,6 +17,11 @@
         android:theme="@style/Theme.ComposePlayground"
         tools:targetApi="31">
         <activity
+            android:name=".youtube.part_26_lazy_grid.LazyGridActivity"
+            android:exported="false"
+            android:label="@string/title_activity_lazy_grid"
+            android:theme="@style/Theme.ComposePlayground" />
+        <activity
             android:name=".youtube.part_25_navigation_drawer.NavigationDrawerActivity"
             android:exported="false"
             android:label="@string/title_activity_navigation_drawer"
