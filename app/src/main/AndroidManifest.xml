@@ -17,6 +17,11 @@
         android:theme="@style/Theme.ComposePlayground"
         tools:targetApi="31">
         <activity
+            android:name=".youtube.part_23_pagination.PaginationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_pagination"
+            android:theme="@style/Theme.ComposePlayground" />
+        <activity
             android:name=".youtube.part_22_support_screen_sizes.MainActivity"
             android:exported="false"
             android:label="@string/title_activity_main"

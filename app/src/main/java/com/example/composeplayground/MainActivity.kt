@@ -38,6 +38,7 @@ import com.example.composeplayground.youtube.part_19_multi_select.MultiSelectLis
 import com.example.composeplayground.youtube.part_20_request_permissions.RequestPermissionsScreen
 import com.example.composeplayground.youtube.part_21_clean_theming.spacing
 import com.example.composeplayground.youtube.part_22_support_screen_sizes.ScreenAwareComposable
+import com.example.composeplayground.youtube.part_23_pagination.PaginatedScreen
 //import com.example.composeplayground.youtube.part_20_request_permissions.RequestPermissionsScreen
 import com.example.composeplayground.youtube.part_9_constraint_layouts.*
 import kotlinx.coroutines.delay
@@ -54,7 +55,8 @@ class MainActivity : BaseComposeActivity() {
 //                RootNavigationGraph(navController = navController)
 //                MultiSelectList()
 //                RequestPermissionsScreen()
-                ScreenAwareComposable()
+//                ScreenAwareComposable()
+                PaginatedScreen()
             }
         }
     }
