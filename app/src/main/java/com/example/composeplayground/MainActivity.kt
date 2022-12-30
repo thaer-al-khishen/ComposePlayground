@@ -22,6 +22,7 @@ import com.example.composeplayground.youtube.part_12_navigation.Screen
 import com.example.composeplayground.youtube.part_21_clean_theming.spacing
 import com.example.composeplayground.youtube.part_23_pagination.PaginatedScreen
 import com.example.composeplayground.youtube.base.SynchronizedLock
+import com.example.composeplayground.youtube.part_27_deeplinking.DeepLinkingScreen
 //import com.example.composeplayground.youtube.part_20_request_permissions.RequestPermissionsScreen
 import kotlinx.coroutines.delay
 
@@ -40,7 +41,8 @@ class MainActivity : BaseComposeActivity() {
                 .fillMaxSize()
                 .padding(MaterialTheme.spacing.default)) {
 //                RootNavigationGraph(navController = navController)
-                PaginatedScreen(SynchronizedLock())
+//                PaginatedScreen(SynchronizedLock())
+                DeepLinkingScreen()
             }
 
 
