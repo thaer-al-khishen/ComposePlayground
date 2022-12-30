@@ -1,18 +1,29 @@
 package com.example.composeplayground
 
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.animation.OvershootInterpolator
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -25,6 +36,8 @@ import com.example.composeplayground.youtube.base.SynchronizedLock
 import com.example.composeplayground.youtube.part_27_deeplinking.DeepLinkingScreen
 //import com.example.composeplayground.youtube.part_20_request_permissions.RequestPermissionsScreen
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.*
 
 var COMPLEX_OBJECT = "Complex_object"
 var COMPLEX_OBJECT_2 = Screen.DetailScreen.route + "/?$COMPLEX_OBJECT={$COMPLEX_OBJECT}"
@@ -37,18 +50,121 @@ class MainActivity : BaseComposeActivity() {
             val navController = rememberNavController()
             val apiKey = BuildConfig.API_KEY
 
-            Surface(color = Color.White, modifier = Modifier
-                .fillMaxSize()
-                .padding(MaterialTheme.spacing.default)) {
+            Surface(
+                color = Color.White, modifier = Modifier
+                    .fillMaxSize()
+                    .padding(MaterialTheme.spacing.default)
+            ) {
 //                RootNavigationGraph(navController = navController)
 //                PaginatedScreen(SynchronizedLock())
-                DeepLinkingScreen()
+//                DeepLinkingScreen()
+                SOList()
             }
 
 
         }
     }
 }
+
+fun <T> SnapshotStateList<T>.swapList(newList: List<T>) {
+    clear()
+    addAll(newList)
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun SOList() {
+
+    val list = remember { mutableStateListOf<CustomItem>() }
+
+    LazyColumn {
+        item {
+            Button(onClick = {
+                list.swapList(
+                    listOf(
+                        CustomItem(name = "Item A", description = "Item A description"),
+                        CustomItem(name = "Item B", description = "Item B description"),
+                        CustomItem(name = "Item C", description = "Item C description"),
+                        CustomItem(name = "Item D", description = "Item D description")
+                    ).shuffled()
+                )
+            }) {
+                Text("Shuffle")
+            }
+        }
+        items(list,
+            key = { it.id }
+        ) {
+            Text("Item $it")
+        }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun RandomList() {
+
+//    val mainViewModel: MainViewModel = viewModel()
+//
+//    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+//
+//        LazyColumn(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .fillMaxHeight(0.75f)
+//        ) {
+//            items(mainViewModel.viewState.value.items) {
+//                key(it.id)
+//                {
+//                    Text(
+//                        text = "Item ${it} with description: ${it.description}",
+//                        fontSize = 32.sp,
+//                        fontWeight = FontWeight.Bold,
+//                        textAlign = TextAlign.Center,
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .padding(24.dp)
+//                    )
+//                }
+//            }
+//        }
+//        Button(onClick = {
+//            mainViewModel.shuffle()
+//        }, modifier = Modifier.align(Alignment.BottomCenter)) {
+//            Text(text = "Shuffle")
+//        }
+//    }
+
+    var list by remember {
+        mutableStateOf(
+            listOf(
+                CustomItem(name = "Item A", description = "Item A description"),
+                CustomItem(name = "Item B", description = "Item B description"),
+                CustomItem(name = "Item C", description = "Item C description"),
+                CustomItem(name = "Item D", description = "Item D description")
+            )
+        )
+    }
+
+    LazyColumn {
+        item {
+            Button(onClick = { list = list.shuffled() }) {
+                Text("Shuffle")
+            }
+        }
+        items(list,
+            key = { it.id }
+        ) {
+            Text("Item $it", Modifier.animateItemPlacement())
+        }
+    }
+}
+
+data class CustomItem(
+    val id: String = UUID.randomUUID().toString(),
+    var name: String,
+    val description: String
+)
 
 @Composable
 fun Navigation() {
