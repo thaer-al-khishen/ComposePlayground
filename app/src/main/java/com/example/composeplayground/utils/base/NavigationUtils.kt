@@ -1,13 +1,11 @@
-package com.example.composeplayground.youtube.base
+package com.example.composeplayground.utils.base
 
 import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.navigation.*
 import androidx.navigation.compose.composable
-import com.example.composeplayground.youtube.part_12_navigation.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.ramcosta.composedestinations.utils.composable
 
 inline fun <reified T> getObject(url: String): T {
     val type = object : TypeToken<T>() {}.type

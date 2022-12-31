@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.composeplayground.youtube.base.*
+import com.example.composeplayground.utils.base.*
 
 var COMPLEX_OBJECT = "Complex_object"   //Object Key
 var DETAILS = "details/"    //Nav destination

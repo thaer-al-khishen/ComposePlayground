@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.composeplayground.youtube.base.SynchronizedLock
+import com.example.composeplayground.utils.base.SynchronizedLock
 
 class PaginationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

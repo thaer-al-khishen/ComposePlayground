@@ -6,18 +6,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.internal.ComposableLambda
-import androidx.compose.runtime.rememberCompositionContext
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.*
-import com.example.composeplayground.youtube.base.BaseComposeActivity
-import com.example.composeplayground.youtube.base.*
+import com.example.composeplayground.utils.base.BaseComposeActivity
 
 class ConstraintLayoutsActivity : BaseComposeActivity() {
 

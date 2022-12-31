@@ -1,4 +1,4 @@
-package com.example.composeplayground.youtube.base
+package com.example.composeplayground.utils.base
 
 class SynchronizedLock {
     private var isLocked = false

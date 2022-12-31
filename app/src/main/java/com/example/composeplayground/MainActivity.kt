@@ -1,8 +1,6 @@
 package com.example.composeplayground
 
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.animation.OvershootInterpolator
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.*
@@ -19,24 +17,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.composeplayground.youtube.base.*
+import com.example.composeplayground.test.TestScreen
+import com.example.composeplayground.utils.base.*
 import com.example.composeplayground.youtube.part_12_navigation.Screen
 import com.example.composeplayground.youtube.part_21_clean_theming.spacing
-import com.example.composeplayground.youtube.part_23_pagination.PaginatedScreen
-import com.example.composeplayground.youtube.base.SynchronizedLock
-import com.example.composeplayground.youtube.part_27_deeplinking.DeepLinkingScreen
 //import com.example.composeplayground.youtube.part_20_request_permissions.RequestPermissionsScreen
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import java.util.*
 
 var COMPLEX_OBJECT = "Complex_object"
@@ -56,12 +46,8 @@ class MainActivity : BaseComposeActivity() {
                     .padding(MaterialTheme.spacing.default)
             ) {
 //                RootNavigationGraph(navController = navController)
-//                PaginatedScreen(SynchronizedLock())
-//                DeepLinkingScreen()
-                SOList()
+                TestScreen()
             }
-
-
         }
     }
 }
