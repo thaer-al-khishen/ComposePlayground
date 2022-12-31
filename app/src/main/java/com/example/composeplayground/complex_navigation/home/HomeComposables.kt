@@ -9,6 +9,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.composeplayground.basic_api.api_test.BasicApiTendersScreen
 import com.example.composeplayground.complex_navigation.SimpleScreenContent
 
 @Composable
@@ -47,10 +48,11 @@ fun Home(onDetailsClicked: () -> Unit) {
 
 @Composable
 fun Profile() {
-    SimpleScreenContent(
-        name = BottomBarScreen.Profile.route,
-        onClick = {}
-    )
+//    SimpleScreenContent(
+//        name = BottomBarScreen.Profile.route,
+//        onClick = {}
+//    )
+    BasicApiTendersScreen()
 }
 
 @Composable
@@ -83,8 +85,11 @@ fun RowScope.AddItem(
         unselectedContentColor = LocalContentColor.current.copy(alpha = ContentAlpha.disabled),
         onClick = {
             navController.navigate(screen.route) {
-                popUpTo(navController.graph.findStartDestination().id)
+                popUpTo(navController.graph.findStartDestination().id) {
+                    saveState = true
+                }
                 launchSingleTop = true
+                restoreState = true
             }
         }
     )
