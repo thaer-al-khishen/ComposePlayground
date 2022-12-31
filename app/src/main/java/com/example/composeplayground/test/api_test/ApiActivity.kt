@@ -39,9 +39,10 @@ fun TendersScreen(
 
     val screenState = apiViewModel.uiState.collectAsStateLifecycleAware()
 
-    LaunchedEffect(key1 = true) {
-        apiViewModel.getTenders()
-    }
+    //Place the following getTenders function in the init block of the recyclerview if you want it to survive config change
+//    LaunchedEffect(key1 = true) {
+//        apiViewModel.getTenders()
+//    }
 
     Column(
         modifier = Modifier.fillMaxSize(),

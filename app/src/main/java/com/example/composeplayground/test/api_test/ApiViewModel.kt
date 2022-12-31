@@ -12,6 +12,10 @@ class ApiViewModel: BaseViewModel() {
     private var _uiState = createMutableStateFlow<List<ChildModel>>()
     val uiState = _uiState.asStateFlow()
 
+    init {
+        getTenders()
+    }
+
     fun getTenders() {
         launchSmartScope(_uiState) {
             _uiState.updateDataWith {
