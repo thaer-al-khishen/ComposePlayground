@@ -18,7 +18,6 @@ suspend inline fun <T: Any> wrapWithGenericData(crossinline action: suspend () -
     return withContext(Dispatchers.IO) {
         try {
             GenericData.Initial
-            delay(2000)
             GenericData.Success(action.invoke())
         } catch (e: Exception) {
             GenericData.Error(e.message ?: "Some error occurred")

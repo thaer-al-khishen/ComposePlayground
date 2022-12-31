@@ -22,6 +22,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.composeplayground.test.TestScreen
+import com.example.composeplayground.test.api_test.TendersScreen
 import com.example.composeplayground.utils.base.*
 import com.example.composeplayground.youtube.part_12_navigation.Screen
 import com.example.composeplayground.youtube.part_21_clean_theming.spacing
@@ -46,7 +47,8 @@ class MainActivity : BaseComposeActivity() {
                     .padding(MaterialTheme.spacing.default)
             ) {
 //                RootNavigationGraph(navController = navController)
-                TestScreen()
+//                TestScreen()
+                TendersScreen()
             }
         }
     }
