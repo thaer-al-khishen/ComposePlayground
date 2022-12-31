@@ -1,10 +1,10 @@
-package com.example.composeplayground.project_x.home.details
+package com.example.composeplayground.complex_navigation.home.details
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.composeplayground.project_x.root.Graph
+import com.example.composeplayground.complex_navigation.root.Graph
 
 fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
     navigation(

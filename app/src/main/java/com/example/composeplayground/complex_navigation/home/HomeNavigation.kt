@@ -1,4 +1,4 @@
-package com.example.composeplayground.project_x.home
+package com.example.composeplayground.complex_navigation.home
 
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -6,8 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.composeplayground.project_x.home.details.detailsNavGraph
-import com.example.composeplayground.project_x.root.Graph
+import com.example.composeplayground.complex_navigation.home.details.detailsNavGraph
+import com.example.composeplayground.complex_navigation.root.Graph
 
 @Composable
 fun HomeScreen(navController: NavHostController = rememberNavController()) {

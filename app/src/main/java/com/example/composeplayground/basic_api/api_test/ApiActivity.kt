@@ -1,4 +1,4 @@
-package com.example.composeplayground.test
+package com.example.composeplayground.basic_api.api_test
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,37 +10,38 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.composeplayground.project_x.collectAsStateLifecycleAware
-import com.example.composeplayground.utils.*
+import com.example.composeplayground.complex_navigation.collectAsStateLifecycleAware
+import com.example.composeplayground.utils.handleErrorState
+import com.example.composeplayground.utils.handleLoadingState
+import com.example.composeplayground.utils.handleSuccessState
 
-class TestActivity : ComponentActivity() {
+class ApiActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TestScreen()
+            TendersScreen()
         }
     }
 }
 
 @Composable
-fun TestScreen(
-    testViewModel: TestViewModel = viewModel()
+fun TendersScreen(
+    apiViewModel: ApiViewModel = viewModel()
 ) {
 
-    val screenState = testViewModel.uiState.collectAsStateLifecycleAware()
+    val screenState = apiViewModel.uiState.collectAsStateLifecycleAware()
 
-    LaunchedEffect(key1 = true) {
-        testViewModel.getObjects()
-    }
+    //Place the following getTenders function in the init block of the recyclerview if you want it to survive config change
+//    LaunchedEffect(key1 = true) {
+//        apiViewModel.getTenders()
+//    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -60,24 +61,14 @@ fun TestScreen(
                 LazyColumn(modifier = Modifier.fillMaxWidth()) {
                     items(list) {
                         key(it.id) {
-                            Text(text = "${it.name} ${it.description}")
+                            Text(text = "${it.category} ${it.phase_en}")
                         }
                     }
                 }
-                Button(onClick = testViewModel::shuffleObjects) {
-                    Text(text = "Shuffle")
-                }
-                //Note: The following will not work, you need to remove the paranthesis
-//                Button(onClick = { testViewModel::shuffleObjects }) {
-//                    Text(text = "Shuffle")
-//                }
-                //The following might cause recomposition:
-//                Button(onClick = { testViewModel.shuffleObjects() }) {
-//                    Text(text = "Shuffle")
-//                }
             }
             ?.handleErrorState {
                 Text(text = "An error has occured: $it")
             }
     }
+
 }

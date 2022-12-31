@@ -1,4 +1,4 @@
-package com.example.composeplayground.test.api_test
+package com.example.composeplayground.basic_api.api_test
 
 import com.example.composeplayground.utils.wrapWithGenericData
 import retrofit2.Retrofit

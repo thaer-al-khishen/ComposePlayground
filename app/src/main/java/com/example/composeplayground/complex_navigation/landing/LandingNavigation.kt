@@ -1,11 +1,11 @@
-package com.example.composeplayground.project_x.landing
+package com.example.composeplayground.complex_navigation.landing
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.composeplayground.project_x.home.HomeScreen
-import com.example.composeplayground.project_x.root.Graph
+import com.example.composeplayground.complex_navigation.home.HomeScreen
+import com.example.composeplayground.complex_navigation.root.Graph
 
 fun NavGraphBuilder.landingNavGraph(navController: NavHostController) {
     navigation(

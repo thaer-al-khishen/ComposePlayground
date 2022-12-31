@@ -1,17 +1,10 @@
-package com.example.composeplayground.project_x.home
+package com.example.composeplayground.complex_navigation.home
 
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
 
 sealed class BottomBarScreen(
     val route: String,

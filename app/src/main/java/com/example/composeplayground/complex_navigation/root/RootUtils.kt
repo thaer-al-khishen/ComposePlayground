@@ -1,4 +1,4 @@
-package com.example.composeplayground.project_x.root
+package com.example.composeplayground.complex_navigation.root
 
 object Graph {
     const val ROOT = "root_graph"

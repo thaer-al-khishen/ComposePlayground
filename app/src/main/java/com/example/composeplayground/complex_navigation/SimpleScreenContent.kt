@@ -1,4 +1,4 @@
-package com.example.composeplayground.project_x
+package com.example.composeplayground.complex_navigation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

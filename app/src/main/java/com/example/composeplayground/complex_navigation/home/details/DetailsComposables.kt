@@ -1,8 +1,7 @@
-package com.example.composeplayground.project_x.home.details
+package com.example.composeplayground.complex_navigation.home.details
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
-import com.example.composeplayground.project_x.SimpleScreenContent
+import com.example.composeplayground.complex_navigation.SimpleScreenContent
 
 @Composable
 fun DetailsInformation(onInformationClicked: () -> Unit) {

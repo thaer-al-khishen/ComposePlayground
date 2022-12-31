@@ -1,9 +1,6 @@
-package com.example.composeplayground.test.api_test
+package com.example.composeplayground.basic_api.api_test
 
-import androidx.lifecycle.ViewModel
-import com.example.composeplayground.test.DataSource
-import com.example.composeplayground.test.ObjectInfo
-import com.example.composeplayground.test.api_test.model.ChildModel
+import com.example.composeplayground.basic_api.api_test.model.ChildModel
 import com.example.composeplayground.utils.base.BaseViewModel
 import kotlinx.coroutines.flow.asStateFlow
 

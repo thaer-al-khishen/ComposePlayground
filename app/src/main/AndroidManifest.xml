@@ -20,12 +20,12 @@
         android:theme="@style/Theme.ComposePlayground"
         tools:targetApi="31">
         <activity
-            android:name=".test.api_test.ApiActivity"
+            android:name=".basic_api.api_test.ApiActivity"
             android:exported="false"
             android:label="@string/title_activity_api"
             android:theme="@style/Theme.ComposePlayground" />
         <activity
-            android:name=".test.TestActivity"
+            android:name=".basic_api.TestActivity"
             android:exported="false"
             android:label="@string/title_activity_test"
             android:theme="@style/Theme.ComposePlayground" />

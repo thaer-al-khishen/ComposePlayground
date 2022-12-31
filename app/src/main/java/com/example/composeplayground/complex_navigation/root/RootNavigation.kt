@@ -1,9 +1,9 @@
-package com.example.composeplayground.project_x.root
+package com.example.composeplayground.complex_navigation.root
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.example.composeplayground.project_x.landing.landingNavGraph
+import com.example.composeplayground.complex_navigation.landing.landingNavGraph
 
 @Composable
 fun RootNavigationGraph(navController: NavHostController) {

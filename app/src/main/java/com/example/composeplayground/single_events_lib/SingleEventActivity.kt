@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.palm.composestateevents.EventEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.composeplayground.project_x.collectAsStateLifecycleAware
+import com.example.composeplayground.complex_navigation.collectAsStateLifecycleAware
 
 class SingleEventActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

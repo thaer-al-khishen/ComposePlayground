@@ -1,4 +1,4 @@
-package com.example.composeplayground.project_x
+package com.example.composeplayground.complex_navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State

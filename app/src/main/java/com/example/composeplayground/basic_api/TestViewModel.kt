@@ -1,4 +1,4 @@
-package com.example.composeplayground.test
+package com.example.composeplayground.basic_api
 
 import com.example.composeplayground.utils.base.BaseViewModel
 import kotlinx.coroutines.flow.asStateFlow

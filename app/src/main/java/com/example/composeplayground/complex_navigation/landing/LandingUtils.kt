@@ -1,4 +1,4 @@
-package com.example.composeplayground.project_x.landing
+package com.example.composeplayground.complex_navigation.landing
 
 sealed class LandingScreen(val route: String) {
     object Login : LandingScreen(route = "LOGIN")
