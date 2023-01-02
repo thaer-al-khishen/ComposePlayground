@@ -1,9 +1,12 @@
 package com.example.composeplayground.complex_navigation.home
 
+import android.util.Log
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -11,6 +14,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.composeplayground.basic_api.api_test.BasicApiTendersScreen
 import com.example.composeplayground.complex_navigation.SimpleScreenContent
+import com.example.composeplayground.event_bus_pattern.AppEvent
+import com.example.composeplayground.event_bus_pattern.EventBusController
+import com.example.composeplayground.event_bus_pattern.EventsViewModel
+import com.example.composeplayground.event_bus_pattern.LogoutListenerComposable
+import com.example.composeplayground.utils.base.launchFastScope
+import kotlinx.coroutines.*
 
 @Composable
 fun BottomBar(navController: NavHostController) {
@@ -59,7 +68,11 @@ fun Profile() {
 fun Settings() {
     SimpleScreenContent(
         name = BottomBarScreen.Settings.route,
-        onClick = { }
+        onClick = {
+            launchFastScope {
+                EventBusController.publishEvent(AppEvent.LOGOUT)
+            }
+        }
     )
 }
 

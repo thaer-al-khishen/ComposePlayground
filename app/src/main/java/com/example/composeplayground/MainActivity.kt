@@ -1,7 +1,9 @@
 package com.example.composeplayground
 
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.OvershootInterpolator
+import android.widget.ImageView
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -17,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -48,9 +51,19 @@ class MainActivity : BaseComposeActivity() {
                 RootNavigationGraph(navController = navController)
 //                TestScreen()
 //                TendersScreen()
+
             }
         }
     }
+}
+
+@Composable
+fun CustomViews() {
+    AndroidView(factory = { ctx ->
+        ImageView(ctx).apply {
+            setImageResource(R.drawable.music_knob)
+        }
+    })
 }
 
 fun <T> SnapshotStateList<T>.swapList(newList: List<T>) {
@@ -61,10 +74,12 @@ fun <T> SnapshotStateList<T>.swapList(newList: List<T>) {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SOList() {
-
     val list = remember { mutableStateListOf<CustomItem>() }
-
+    val count = remember {
+        mutableStateOf(0)
+    }
     LazyColumn {
+
         item {
             Button(onClick = {
                 list.swapList(
@@ -72,17 +87,19 @@ fun SOList() {
                         CustomItem(name = "Item A", description = "Item A description"),
                         CustomItem(name = "Item B", description = "Item B description"),
                         CustomItem(name = "Item C", description = "Item C description"),
-                        CustomItem(name = "Item D", description = "Item D description")
                     ).shuffled()
                 )
             }) {
-                Text("Shuffle")
+                Text("Shuffle $count")
             }
         }
         items(list,
             key = { it.id }
         ) {
             Text("Item $it")
+            SideEffect {
+                count.value++
+            }
         }
     }
 }
@@ -90,38 +107,6 @@ fun SOList() {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RandomList() {
-
-//    val mainViewModel: MainViewModel = viewModel()
-//
-//    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-//
-//        LazyColumn(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .fillMaxHeight(0.75f)
-//        ) {
-//            items(mainViewModel.viewState.value.items) {
-//                key(it.id)
-//                {
-//                    Text(
-//                        text = "Item ${it} with description: ${it.description}",
-//                        fontSize = 32.sp,
-//                        fontWeight = FontWeight.Bold,
-//                        textAlign = TextAlign.Center,
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .padding(24.dp)
-//                    )
-//                }
-//            }
-//        }
-//        Button(onClick = {
-//            mainViewModel.shuffle()
-//        }, modifier = Modifier.align(Alignment.BottomCenter)) {
-//            Text(text = "Shuffle")
-//        }
-//    }
-
     var list by remember {
         mutableStateOf(
             listOf(
@@ -140,10 +125,11 @@ fun RandomList() {
             }
         }
         items(list,
-            key = { it.id }
+//            key = { it.id }
         ) {
             Text("Item $it", Modifier.animateItemPlacement())
         }
+
     }
 }
 
