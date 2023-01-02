@@ -49,11 +49,15 @@ class MainActivity : BaseComposeActivity() {
                     .padding(MaterialTheme.spacing.default)
             ) {
                 RootNavigationGraph(navController = navController)
-//                TestScreen()
-//                TendersScreen()
-
+            }
+            val activityKiller: () -> Unit = {
+                this.finishAndRemoveTask()
+            }
+            ExitListenerComposable {
+                activityKiller.invoke()
             }
         }
+
     }
 }
 
