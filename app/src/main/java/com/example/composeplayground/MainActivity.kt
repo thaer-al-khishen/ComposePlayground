@@ -25,6 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.composeplayground.complex_navigation.root.RootNavigationGraph
+import com.example.composeplayground.lazycolumn_with_search.SearchableList
 import com.example.composeplayground.utils.base.*
 import com.example.composeplayground.youtube.part_12_navigation.Screen
 import com.example.composeplayground.youtube.part_21_clean_theming.spacing
@@ -48,7 +49,8 @@ class MainActivity : BaseComposeActivity() {
                     .fillMaxSize()
                     .padding(MaterialTheme.spacing.default)
             ) {
-                RootNavigationGraph(navController = navController)
+//                RootNavigationGraph(navController = navController)
+                SearchableList()
             }
             val activityKiller: () -> Unit = {
                 this.finishAndRemoveTask()
