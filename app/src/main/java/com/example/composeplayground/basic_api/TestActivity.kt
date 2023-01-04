@@ -1,6 +1,7 @@
 package com.example.composeplayground.basic_api
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.composeplayground.complex_navigation.collectAsStateLifecycleAware
 import com.example.composeplayground.utils.*
+import com.example.composeplayground.utils.base.returnedSuccessWith
 
 class TestActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +39,19 @@ fun TestScreen(
 ) {
 
     val screenState = testViewModel.uiState.collectAsStateLifecycleAware()
+    val firstState = testViewModel.firstState.collectAsStateLifecycleAware()
+    val secondState = testViewModel.secondState.collectAsStateLifecycleAware()
+    val thirdState = testViewModel.thirdState.collectAsStateLifecycleAware()
 
     LaunchedEffect(key1 = true) {
         testViewModel.getObjects()
+        testViewModel.getFirstBatch()
+        testViewModel.getSecondBatch()
+        testViewModel.getThirdBatch()
+    }
+
+    if (firstState.returnedSuccessWith(secondState).returnedSuccessWith(thirdState)) {
+        Log.d("ThaerOutput", "Retrieved all")
     }
 
     Column(

@@ -24,7 +24,6 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.composeplayground.complex_navigation.collectAsStateLifecycleAware
 import com.example.composeplayground.utils.handleErrorState
-import com.example.composeplayground.utils.handleLoadingState
 import com.example.composeplayground.utils.handleSuccessState
 
 class ApiActivity : ComponentActivity() {
@@ -55,14 +54,14 @@ fun BasicApiTendersScreen(
     ) {
 
         screenState
-            .handleLoadingState {
-                AnimatedVisibility(visible = (screenState.value.loading)) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-            }
-            ?.handleSuccessState { list ->
+//            .handleLoadingState {
+//                AnimatedVisibility(visible = (screenState.value.loading)) {
+//                    CircularProgressIndicator(
+//                        modifier = Modifier.fillMaxSize()
+//                    )
+//                }
+//            }?
+            .handleSuccessState { list ->
                 LazyColumn(modifier = Modifier.fillMaxWidth()) {
                     items(list) {
                         key(it.id) {

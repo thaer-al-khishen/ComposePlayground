@@ -22,9 +22,9 @@ object CoroutineScopeHelper {
     }
 }
 
-inline fun launchFastScope(crossinline action: suspend () -> Unit) {
+inline fun launchFastScope(crossinline action: suspend (CoroutineScope) -> Unit) {
     CoroutineScopeHelper.getCoroutineScope().launch {
-        action.invoke()
+        action.invoke(this)
     }
 //    scope.launch {
 //        action.invoke()
@@ -36,30 +36,16 @@ inline fun launchFastScope(crossinline action: suspend () -> Unit) {
 //    }
 }
 
-@Composable
-fun ExitListenerComposable(ExitEventTriggered: () -> Unit) {
-    val lifeCycleOwner = LocalLifecycleOwner.current
-
-    val coroutineScope = rememberCoroutineScope()
-
-    DisposableEffect(key1 = lifeCycleOwner) {
-
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_START) {
-                coroutineScope.launch {
-                    EventBusController.eventBus.filter {
-                        it == AppEvent.EXIT
-                    }.collectLatest { logoutEvent ->
-                        ExitEventTriggered.invoke()
-                    }
-                }
-            }
-        }
-        lifeCycleOwner.lifecycle.addObserver(observer)
-
-        onDispose {
-            lifeCycleOwner.lifecycle.removeObserver(observer)
-        }
+fun <T : Any, R: Any> State<GenericResponse<GenericData<T>>>.returnedSuccessWith(otherState: State<GenericResponse<GenericData<R>>>): Boolean {
+    if (this.value.data is GenericData.Success && otherState.value.data is GenericData.Success) {
+        return true
     }
+    return false
+}
 
+fun <T : Any> Boolean.returnedSuccessWith(otherState: State<GenericResponse<GenericData<T>>>): Boolean {
+    if (this && otherState.value.data is GenericData.Success) {
+        return true
+    }
+    return false
 }

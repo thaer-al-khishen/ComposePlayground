@@ -1,8 +1,10 @@
 package com.example.composeplayground.basic_api.api_test
 
 import com.example.composeplayground.basic_api.api_test.model.ChildModel
+import com.example.composeplayground.utils.GenericData
 import com.example.composeplayground.utils.base.BaseViewModel
-import kotlinx.coroutines.flow.asStateFlow
+import com.example.composeplayground.utils.base.GenericResponse
+import kotlinx.coroutines.flow.*
 
 class ApiViewModel: BaseViewModel() {
 

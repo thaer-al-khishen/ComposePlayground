@@ -7,9 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.composeplayground.complex_navigation.home.details.detailsNavGraph
-import com.example.composeplayground.complex_navigation.landing.LandingScreen
 import com.example.composeplayground.complex_navigation.root.Graph
-import com.example.composeplayground.event_bus_pattern.LogoutListenerComposable
 
 @Composable
 fun HomeScreen(navController: NavHostController = rememberNavController()) {

@@ -14,7 +14,6 @@ import com.example.composeplayground.complex_navigation.SimpleScreenContent
 import com.example.composeplayground.event_bus_pattern.AppEvent
 import com.example.composeplayground.event_bus_pattern.EventBusController
 import com.example.composeplayground.utils.base.launchFastScope
-import kotlinx.coroutines.*
 
 @Composable
 fun BottomBar(navController: NavHostController) {
@@ -65,7 +64,7 @@ fun Settings() {
         name = BottomBarScreen.Settings.route,
         onClick = {
             launchFastScope {
-                EventBusController.publishEvent(AppEvent.EXIT)
+                EventBusController.publishAppEvent(AppEvent.EXIT)
             }
         }
     )

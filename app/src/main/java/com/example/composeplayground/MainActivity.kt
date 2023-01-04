@@ -1,17 +1,24 @@
 package com.example.composeplayground
 
+//import com.example.composeplayground.youtube.part_20_request_permissions.RequestPermissionsScreen
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
 import androidx.activity.compose.setContent
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
@@ -24,14 +31,16 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.composeplayground.basic_api.TestScreen
 import com.example.composeplayground.complex_navigation.root.RootNavigationGraph
-import com.example.composeplayground.lazycolumn_with_search.SearchableList
-import com.example.composeplayground.utils.base.*
+import com.example.composeplayground.utils.base.BaseComposeActivity
+import com.example.composeplayground.utils.base.ExitListenerComposable
+import com.example.composeplayground.utils.base.launchFastScope
 import com.example.composeplayground.youtube.part_12_navigation.Screen
 import com.example.composeplayground.youtube.part_21_clean_theming.spacing
-//import com.example.composeplayground.youtube.part_20_request_permissions.RequestPermissionsScreen
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 var COMPLEX_OBJECT = "Complex_object"
 var COMPLEX_OBJECT_2 = Screen.DetailScreen.route + "/?$COMPLEX_OBJECT={$COMPLEX_OBJECT}"
@@ -50,7 +59,8 @@ class MainActivity : BaseComposeActivity() {
                     .padding(MaterialTheme.spacing.default)
             ) {
 //                RootNavigationGraph(navController = navController)
-                com.example.composeplayground.youtube.part_12_navigation.Navigation()
+//                com.example.composeplayground.youtube.part_12_navigation.Navigation()
+                TestScreen()
             }
             val activityKiller: () -> Unit = {
                 this.finishAndRemoveTask()
@@ -58,6 +68,23 @@ class MainActivity : BaseComposeActivity() {
             ExitListenerComposable {
                 activityKiller.invoke()
             }
+
+
+//            launchFastScope {
+//                with(it) {
+//                    groupTogether({
+//                        delay(1000)
+//                        Log.d("ThaerOutput","Logged after 1 second")
+//                    }, {
+//                        delay(2000)
+//                        Log.d("ThaerOutput","Logged after 2 seconds")
+//                    }, {
+//                        delay(3000)
+//                        Log.d("ThaerOutput","Logged after 3 seconds")
+//                    })
+//                }
+//            }
+
         }
 
     }

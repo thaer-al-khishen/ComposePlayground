@@ -8,7 +8,7 @@ class EventsViewModel: ViewModel() {
 
     fun logout() {
         viewModelScope.launch {
-            EventBusController.publishEvent(AppEvent.LOGOUT)
+            EventBusController.publishAppEvent(AppEvent.LOGOUT)
         }
     }
 }

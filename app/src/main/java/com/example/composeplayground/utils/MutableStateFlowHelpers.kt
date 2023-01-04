@@ -45,3 +45,17 @@ inline fun <T:Any> State<GenericResponse<GenericData<T>>>.handleLoadingState(cro
     }
     return this.value.data
 }
+
+inline fun <T:Any, R> State<GenericResponse<GenericData<T>>>.handleSuccessState(crossinline action: (T) -> R) : GenericData<T>? {
+    if (this.value.data is GenericData.Success) {
+        action.invoke((this.value.data as GenericData.Success<T>).result)
+    }
+    return this.value.data
+}
+
+inline fun <T:Any> State<GenericResponse<GenericData<T>>>.handleErrorState(crossinline action: (error: String) -> T) : GenericData<T>? {
+    if (this.value.data is GenericData.Error) {
+        action.invoke((this.value.data as GenericData.Error).msg)
+    }
+    return this.value.data
+}
