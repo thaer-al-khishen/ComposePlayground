@@ -50,7 +50,7 @@ class MainActivity : BaseComposeActivity() {
                     .padding(MaterialTheme.spacing.default)
             ) {
 //                RootNavigationGraph(navController = navController)
-                SearchableList()
+                com.example.composeplayground.youtube.part_12_navigation.Navigation()
             }
             val activityKiller: () -> Unit = {
                 this.finishAndRemoveTask()

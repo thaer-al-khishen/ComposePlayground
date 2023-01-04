@@ -15,28 +15,32 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.composeplayground.utils.base.composableWithObject
+import com.example.composeplayground.utils.base.deriveObjectWithKey
+import com.example.composeplayground.utils.base.navigateWithObject
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
-        composable(route = Screen.MainScreen.route) {
-            MainScreen(navController = navController)
+        composable(route = Screen.MainScreen.route) { backStackEntry ->
+            // get data passed back from B
+            val data = backStackEntry
+                .savedStateHandle
+                .getLiveData<String>("key")
+                .value
+
+            MainScreen(data = data ?: "", navController = navController)
         }
-        composable(route = Screen.DetailScreen.route + "/?name={name}", arguments = listOf(   //For extra arguments separate by /: /{name}/{age}
-            navArgument("name") {
-                type = NavType.StringType
-                defaultValue = "Thaer"
-                nullable = true
-            }
-        )) { entry ->
-            DetailScreen(name = entry.arguments?.getString("name"))
+        composableWithObject("name", Screen.DetailScreen.route) {
+            val data = it.deriveObjectWithKey<String>("name")
+            DetailScreen(data, navController)
         }
     }
 }
 
 @Composable
-fun MainScreen(navController: NavController) {
+fun MainScreen(data: String, navController: NavController) {
     var text by remember {
         mutableStateOf("")
     }
@@ -55,21 +59,39 @@ fun MainScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(8.dp))
         Button(
             onClick = {
-                navController.navigate(Screen.DetailScreen.withArgs(text))
+//                navController.navigate(Screen.DetailScreen.withArgs(text))
+                navController.navigateWithObject(Screen.DetailScreen.route, text)
             },
             modifier = Modifier.align(Alignment.End)
         ) {
             Text(text = "To Detail Screen")
         }
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = data)
     }
 }
 
 @Composable
-fun DetailScreen(name: String?) {
+fun DetailScreen(name: String?, navController: NavController) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Hello $name")
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(text = "Hello $name")
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(onClick = {
+                navController.previousBackStackEntry
+                    ?.savedStateHandle
+                    ?.set("key", name)
+                navController.popBackStack()
+            }) {
+                Text(text = "Pop back")
+            }
+        }
     }
 }
