@@ -36,4 +36,5 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_api">ApiActivity</string>
     <string name="title_activity_searchable_list">SearchableListActivity</string>
+    <string name="title_activity_capture_screenshot">CaptureScreenshotActivity</string>
 </resources>

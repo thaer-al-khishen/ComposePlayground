@@ -42,3 +42,35 @@ fun PermissionState.handleRecordAudioPermission() {
         }
     }
 }
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun PermissionState.handleReadExternalStoragePermission(composable: @Composable () -> Unit) {
+    when {
+        hasPermission -> {
+//            composable.invoke()
+        }
+        shouldShowRationale -> {
+            Text(text = "Read external storage permission is needed to save image to gallery")
+        }
+        isPermanentlyDenied() -> {
+            Text(text = "Read external storage permission was permanantly denied. You can enable it in the app settings")
+        }
+    }
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun PermissionState.handleWriteExternalStoragePermission(composable: @Composable () -> Unit) {
+    when {
+        hasPermission -> {
+            composable.invoke()
+        }
+        shouldShowRationale -> {
+            Text(text = "Write external storage permission is needed to save image to gallery")
+        }
+        isPermanentlyDenied() -> {
+            Text(text = "Write external storage permission was permanantly denied. You can enable it in the app settings")
+        }
+    }
+}

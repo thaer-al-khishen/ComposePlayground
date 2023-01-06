@@ -32,6 +32,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.composeplayground.basic_api.TestScreen
+import com.example.composeplayground.capture_screenshot.CaptureScreen
+import com.example.composeplayground.capture_screenshot.CheckPermissionsAndShowScreen
 import com.example.composeplayground.complex_navigation.root.RootNavigationGraph
 import com.example.composeplayground.utils.base.BaseComposeActivity
 import com.example.composeplayground.utils.base.ExitListenerComposable
@@ -60,7 +62,7 @@ class MainActivity : BaseComposeActivity() {
             ) {
 //                RootNavigationGraph(navController = navController)
 //                com.example.composeplayground.youtube.part_12_navigation.Navigation()
-                TestScreen()
+                CheckPermissionsAndShowScreen()
             }
             val activityKiller: () -> Unit = {
                 this.finishAndRemoveTask()
