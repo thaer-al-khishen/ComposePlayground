@@ -1,0 +1,20 @@
+In Jetpack Compose, a Card is a composable that displays content inside a Material Design card.
+It's a container with a specific elevation, shape, and some padding.
+Cards are typically used to represent a single subject or a related group of content.
+
+Key Properties of a Card:
+
+Elevation: This gives the card a shadow, indicating that it's raised above the surface it's on. It helps in distinguishing the card from its background.
+Shape: Cards can have rounded corners or custom shapes.
+Background Color: The color of the card's background.
+Content: The content inside the card, which can be any composable.
+
+Use cards when you need to:
+Group Related Content: Cards are great for grouping elements that belong together, like an image, a title, and a description.
+Highlight Information: The elevation and shape of a card make it stand out from the rest of the UI, drawing attention to its content.
+Create a Sense of Depth: The shadow of a card creates a sense of depth, making the UI more dynamic.
+
+Cards vs. Surface
+Surface is another composable in Jetpack Compose that provides a background, elevation, and shape for its content. The choice between Card and Surface depends on the use case:
+Use a Card when you want to display related content as a single unit that stands out from the rest of the UI. Cards imply interactivity; they're often used to represent an entry point to more detailed information (like a feed of articles, each being a card).
+Use a Surface for more general purposes, like giving a section of your UI a specific background color, elevation, or shape. It's more about styling and less about grouping content as a card does.
