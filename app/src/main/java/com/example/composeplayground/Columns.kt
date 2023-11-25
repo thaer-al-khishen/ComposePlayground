@@ -203,7 +203,7 @@ fun NormalColumn_Middle_SpaceBetween_Center_Text_Position() {
         verticalArrangement = Arrangement.SpaceBetween,  //Divides the content equally, like SpaceEvenly, but in this case, the start and end composables inside the content are at the edges of the screen
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Center(
+        CenterInColumn(
             modifier = Modifier
                 .padding(top = 100.dp)
                 .height(150.dp)
@@ -257,7 +257,7 @@ fun NormalColumn_Middle_SpacedBy() {
 }
 
 @Composable
-fun Center(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
+fun CenterInColumn(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
@@ -275,7 +275,7 @@ fun NormalColumn_Middle_SpaceBetween_fill_height() {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text("Android")
-        Center(
+        CenterInColumn(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth(0.5f)

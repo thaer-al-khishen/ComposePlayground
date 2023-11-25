@@ -13,15 +13,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Column_SpaceBetween_fill_height_scrollable()
-//            ScrollableColumn(
-//                modifier = Modifier.fillMaxSize(),
-//                horizontalAlignment = Alignment.Start
-//            ) {
-//                for (item in 1..50) {
-//                    Text(text = "Column item: $item")
-//                }
-//            }
+            MixColumnAndRow_Aligned_Center()
         }
     }
 }
