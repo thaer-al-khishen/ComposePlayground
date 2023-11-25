@@ -1,0 +1,12 @@
+In Android's Jetpack Compose, LazyColumn is a highly efficient way to display scrollable lists.
+It's analogous to RecyclerView in the traditional Android View system,
+designed to only compose and lay out the visible items on the screen, thus improving performance for large lists.
+
+Introduction to LazyColumn
+LazyColumn is ideal for displaying a scrollable list where the number of items is large or unknown.
+It only composes and lays out the items that are currently visible on the screen, recycling the item views as you scroll.
+This lazy loading approach makes it much more efficient than a regular Column with a Scrollable modifier for large lists.
+For complex items or items with images, consider using remember and key to maintain state and performance.
+
+rememberLazyListState() is specifically for remembering the scroll position and state of a LazyColumn.
+It's useful when you want to maintain the scroll position across recompositions, or if you need to programmatically control the scroll position.
