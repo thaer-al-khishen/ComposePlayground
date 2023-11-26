@@ -1,0 +1,158 @@
+Material 3 introduces several enhancements and customization options for `TextField` components in Jetpack Compose. These customizations allow for a wide range of styles and functionalities, aligning with the latest Material Design guidelines. Here's a detailed overview of the different customizations available with Material 3 `TextField` components in Jetpack Compose:
+
+### Basic TextField
+The basic `TextField` in Material 3 is similar to Material 2 but with updated default styling to match Material 3 guidelines.
+
+```kotlin
+@Composable
+fun BasicTextField() {
+    var text by remember { mutableStateOf("") }
+
+    TextField(
+        value = text,
+        onValueChange = { text = it },
+        label = { Text("Label") }
+    )
+}
+```
+
+### OutlinedTextField
+An alternative to the basic `TextField` is `OutlinedTextField`, which provides an outlined style around the text field.
+
+```kotlin
+@Composable
+fun OutlinedTextFieldExample() {
+    var text by remember { mutableStateOf("") }
+
+    OutlinedTextField(
+        value = text,
+        onValueChange = { text = it },
+        label = { Text("Label") }
+    )
+}
+```
+
+### Custom Colors
+You can customize the colors of the `TextField`, such as the text color, label color, and the color of the underline or outline.
+
+```kotlin
+@Composable
+fun CustomColorTextField() {
+    var text by remember { mutableStateOf("") }
+
+    TextField(
+        value = text,
+        onValueChange = { text = it },
+        label = { Text("Label") },
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Color.Black,
+            cursorColor = Color.Blue,
+            leadingIconColor = Color.Gray,
+            trailingIconColor = Color.Gray,
+            focusedLabelColor = Color.Blue,
+            unfocusedLabelColor = Color.Gray,
+            focusedIndicatorColor = Color.Blue,
+            unfocusedIndicatorColor = Color.Gray
+        )
+    )
+}
+```
+
+### Leading and Trailing Icons
+You can add icons to the start (leading) or end (trailing) of the `TextField` for additional functionality or decoration.
+
+```kotlin
+@Composable
+fun IconTextField() {
+    var text by remember { mutableStateOf("") }
+
+    TextField(
+        value = text,
+        onValueChange = { text = it },
+        label = { Text("Label") },
+        leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
+        trailingIcon = { Icon(Icons.Filled.Clear, contentDescription = null) }
+    )
+}
+```
+
+### Custom Shapes
+Customize the shape of the `TextField` or `OutlinedTextField`. This is useful for matching the text field's shape with your app's design language.
+
+```kotlin
+@Composable
+fun CustomShapeTextField() {
+    var text by remember { mutableStateOf("") }
+
+    TextField(
+        value = text,
+        onValueChange = { text = it },
+        shape = RoundedCornerShape(8.dp)
+    )
+}
+```
+
+### Customizing Font and Text Style
+You can customize the font and text style within the `TextField`.
+
+```kotlin
+@Composable
+fun CustomFontTextField() {
+    var text by remember { mutableStateOf("") }
+
+    TextField(
+        value = text,
+        onValueChange = { text = it },
+        textStyle = TextStyle(fontFamily = FontFamily.Serif, fontSize = 16.sp)
+    )
+}
+```
+
+### Handling Input Types
+You can specify the type of input for the `TextField`, such as password, number, phone, etc., using `keyboardOptions`.
+
+```kotlin
+@Composable
+fun PasswordTextField() {
+    var text by remember { mutableStateOf("") }
+
+    TextField(
+        value = text,
+        onValueChange = { text = it },
+        label = { Text("Password") },
+        visualTransformation = PasswordVisualTransformation(),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+    )
+}
+```
+
+### Error Handling
+Display error states in your `TextField` with custom error messages.
+
+```kotlin
+@Composable
+fun ErrorTextField() {
+    var text by remember { mutableStateOf("") }
+    val isError = text.length < 5
+
+    TextField(
+        value = text,
+        onValueChange = { text = it },
+        isError = isError,
+        label = { Text("Label") },
+        trailingIcon = {
+            if (isError) {
+                Icon(Icons.Filled.Error, contentDescription = "Error")
+            }
+        },
+        colors = TextFieldDefaults.textFieldColors(
+            errorIndicatorColor = Color.Red,
+            errorCursorColor = Color.Red
+        )
+    )
+}
+```
+
+### Conclusion
+These examples showcase the versatility and customization options available with `TextField` components in Material 3 using Jetpack Compose.
+You can mix and match these properties to create a `TextField` that fits perfectly within your app's design system.
