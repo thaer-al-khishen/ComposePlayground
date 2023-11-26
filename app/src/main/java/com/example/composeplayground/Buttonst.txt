@@ -1,0 +1,132 @@
+Buttons are an essential component in any UI toolkit, and Jetpack Compose's
+Material 3 guidelines offer a variety of button styles to suit different use cases.
+Here's a comprehensive overview of buttons in Jetpack Compose, covering both standard and Material 3 guideline styles.
+
+### Basic Button
+A simple button with text. You can customize its appearance and behavior.
+
+```kotlin
+@Composable
+fun BasicButtonExample() {
+    Button(onClick = { /* Handle click */ }) {
+        Text("Click Me")
+    }
+}
+```
+
+### TextButton
+A button with no background or outline, typically used for less prominent actions.
+
+```kotlin
+@Composable
+fun TextButtonExample() {
+    TextButton(onClick = { /* Handle click */ }) {
+        Text("Text Button")
+    }
+}
+
+```
+
+### OutlinedButton
+A button with an outline and transparent background, used to indicate a secondary action.
+
+```kotlin
+@Composable
+fun OutlinedButtonExample() {
+    OutlinedButton(onClick = { /* Handle click */ }) {
+        Text("Outlined Button")
+    }
+}
+```
+
+### Customizing Button Colors
+You can customize the colors of a button to match your app's theme.
+
+```kotlin
+@Composable
+fun CustomColorButton() {
+    Button(
+        onClick = { /* Handle click */ },
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color.Blue,
+            contentColor = Color.White
+        )
+    ) {
+        Text("Custom Color Button")
+    }
+}
+```
+
+### Customizing Button Shape
+Customize the shape of the button to fit your design needs.
+
+```kotlin
+@Composable
+fun CustomShapeButton() {
+    Button(
+        onClick = { /* Handle click */ },
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Text("Rounded Button")
+    }
+}
+```
+
+### Button with Icon
+Buttons can include icons along with text for added clarity.
+
+```kotlin
+@Composable
+fun IconButtonExample() {
+    Button(onClick = { /* Handle click */ }) {
+        Icon(Icons.Filled.Favorite, contentDescription = "Favorite")
+        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+        Text("Like")
+    }
+}
+```
+
+### Material 3 Buttons
+Material 3 introduces updated styles and guidelines for buttons, including Elevated, Filled, and Tonal buttons.
+
+#### Elevated Button
+Similar to the standard button but with elevation that lifts on press.
+
+```kotlin
+@Composable
+fun ElevatedButtonExample() {
+    ElevatedButton(onClick = { /* Handle click */ }) {
+        Text("Elevated Button")
+    }
+}
+```
+
+#### Filled Button
+A button with a solid background color, typically used for primary actions.
+
+```kotlin
+@Composable
+fun FilledButtonExample() {
+    Button(onClick = { /* Handle click */ }) {
+        Text("Filled Button")
+    }
+}
+```
+
+#### Filled Tonal Button
+A variation of the filled button with toned-down colors, suitable for secondary actions.
+
+```kotlin
+@Composable
+fun FilledTonalButtonExample() {
+    FilledTonalButton(onClick = { /* Handle click */ }) {
+        Text("Filled Tonal Button")
+    }
+}
+```
+
+### Conclusion
+Buttons in Jetpack Compose offer a wide range of customization options,
+from basic text buttons to more complex designs with icons and custom shapes.
+With Material 3 guidelines, you have additional styles like Elevated, Filled, and Tonal buttons, providing more choices to match
+the modern UI design trends. Remember to choose the button style that best fits the context of your app and enhances the user experience.
