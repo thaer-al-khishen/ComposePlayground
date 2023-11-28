@@ -74,7 +74,7 @@ fun MainContent(paddingValues: PaddingValues) {
 }
 
 @Composable
-fun BottomAppBarExample() {
+fun Material3BottomAppBar() {
     Scaffold(
         bottomBar = {
             BottomAppBar(
