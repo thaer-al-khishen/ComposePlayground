@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Material3LargeTopAppBar()
+            Material3TopAppBarExitUntilCollapsedScrollBehavior()
         }
     }
 }
