@@ -1,0 +1,128 @@
+# Understanding `LaunchedEffect` in Jetpack Compose
+
+`LaunchedEffect` is a powerful effect in Jetpack Compose that is used to perform side effects within the Compose runtime.
+It's particularly useful for executing coroutine-based tasks.
+Understanding when and how to use `LaunchedEffect` is crucial for managing asynchronous operations and side effects in Compose.
+
+## Key Characteristics of `LaunchedEffect`
+
+1. **Coroutine-based**: `LaunchedEffect` runs within a coroutine, making it suitable for asynchronous operations like network requests,
+database operations, or any suspend function calls.
+
+2. **Lifecycle-aware**: The coroutine launched by `LaunchedEffect` is automatically canceled when the composable leaves the composition
+or the composable's key changes.
+
+3. **Recomposition handling**: If the key parameter of `LaunchedEffect` changes, the current coroutine is canceled,
+and a new coroutine is started with the new key.
+
+## Use Cases for `LaunchedEffect`
+
+### 1. Data Fetching on Composable Entry
+
+Use `LaunchedEffect` to fetch data when a composable enters the composition.
+This is common in scenarios like displaying a screen that requires data from a network or database.
+
+#### Example:
+
+```kotlin
+@Composable
+fun UserProfileScreen(userId: String, viewModel: UserViewModel) {
+    LaunchedEffect(key1 = userId) {
+        viewModel.loadUserData(userId)
+    }
+
+    // UI code to display user data
+}
+```
+
+### 2. Reacting to State Changes
+
+React to changes in state by using the state as a key. When the state changes, `LaunchedEffect` will restart its block.
+
+#### Example:
+
+```kotlin
+@Composable
+fun TimerScreen(timerValue: Int) {
+    LaunchedEffect(key1 = timerValue) {
+        // Perform an action when timerValue changes
+    }
+
+    // UI code for the timer
+}
+```
+
+### 3. Performing Cleanup
+
+Although `LaunchedEffect` doesn't have a built-in cleanup mechanism like `DisposableEffect`,
+you can perform cleanup by launching a coroutine that can be canceled.
+
+#### Example:
+
+```kotlin
+@Composable
+fun LocationListener() {
+    LaunchedEffect(key1 = Unit) {
+        val job = launch {
+            // Start location listening
+        }
+
+        // Cleanup
+        onDispose {
+            job.cancel()
+        }
+    }
+}
+```
+
+### 4. Synchronizing with ViewModel
+
+Use `LaunchedEffect` to trigger actions in a ViewModel when a composable appears or certain conditions change.
+
+#### Example:
+
+```kotlin
+@Composable
+fun ContentScreen(viewModel: ContentViewModel) {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.loadInitialContent()
+    }
+
+    // UI code to display content
+}
+```
+
+### 5. Timer or Delayed Actions
+
+Implement a timer or a delay using `LaunchedEffect`. This can be useful for splash screens or delayed animations.
+
+#### Example:
+
+```kotlin
+@Composable
+fun SplashScreen(navController: NavController) {
+    LaunchedEffect(key1 = Unit) {
+        delay(3000)  // 3-second delay
+        navController.navigate("main")
+    }
+
+    // UI code for splash screen
+}
+```
+
+## Best Practices
+
+1. **Avoid Side Effects in Composables**: Use `LaunchedEffect` for side effects instead of performing them directly in the composable body.
+
+2. **Use Appropriate Keys**: Carefully choose the keys for `LaunchedEffect` to control when the coroutine should restart.
+
+3. **Handle Coroutine Cancellation**: Be mindful of coroutine cancellation and potential exceptions.
+
+4. **Prevent Unnecessary Restarts**: Avoid using keys that change too frequently, leading to unnecessary restarts of the coroutine.
+
+## Conclusion
+
+`LaunchedEffect` is an essential tool in Jetpack Compose for handling side effects, especially those that are coroutine-based.
+It offers a declarative and lifecycle-aware approach to managing asynchronous operations
+and ensures that your composables remain pure and side-effect-free. By understanding and using `LaunchedEffect` appropriately,
+you can build robust and responsive Compose applications.

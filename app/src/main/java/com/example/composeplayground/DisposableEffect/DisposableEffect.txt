@@ -1,0 +1,113 @@
+# Understanding `DisposableEffect` in Jetpack Compose
+
+`DisposableEffect` is a crucial effect in Jetpack Compose used for managing side effects that require cleanup.
+It's especially useful when you need to perform operations that extend beyond the lifecycle of the composable,
+such as adding listeners, starting animations, or any operation that needs to be undone when the composable leaves the composition
+or when certain conditions change.
+
+## Key Characteristics of `DisposableEffect`
+
+1. **Lifecycle-Aware Cleanup**: `DisposableEffect` ensures that the cleanup code is executed when the composable leaves the composition
+or when the keys change.
+
+2. **Key-Based Recomposition**: Similar to `LaunchedEffect`, `DisposableEffect` takes keys as parameters.
+If any of the keys change, the current effect is disposed of, and a new effect is started.
+
+3. **Designed for Side Effects with Cleanup**: Ideal for managing resources or subscriptions that need to be released or cleaned up.
+
+## Use Cases for `DisposableEffect`
+
+### 1. Adding and Removing Listeners
+
+Use `DisposableEffect` for adding listeners (like sensor listeners, location listeners,
+or any custom listeners) and ensure they are removed when not needed.
+
+#### Example:
+
+```kotlin
+@Composable
+fun SensorListenerExample(sensorManager: SensorManager) {
+    DisposableEffect(key1 = sensorManager) {
+        val listener = SensorEventListener { /* Handle sensor updates */ }
+        sensorManager.registerListener(listener, /* sensor */, /* delay */)
+
+        onDispose {
+            sensorManager.unregisterListener(listener)
+        }
+    }
+}
+```
+
+### 2. Managing Subscriptions
+
+Manage subscriptions to data sources like flows, LiveData, or any observable pattern, and unsubscribe appropriately.
+
+#### Example:
+
+```kotlin
+@Composable
+fun FlowSubscriptionExample(flow: Flow<String>) {
+    DisposableEffect(key1 = flow) {
+        val subscription = flow.onEach { /* Handle flow emissions */ }.launchIn(CoroutineScope(Dispatchers.Main))
+
+        onDispose {
+            subscription.cancel()
+        }
+    }
+}
+```
+
+### 3. Handling Animations or Graphic Resources
+
+Start animations or load graphic resources and ensure they are stopped or released when the composable is removed.
+
+#### Example:
+
+```kotlin
+@Composable
+fun AnimationExample(animation: Animation) {
+    DisposableEffect(key1 = animation) {
+        animation.start()
+
+        onDispose {
+            animation.stop()
+        }
+    }
+}
+```
+
+### 4. Interacting with External SDKs or Libraries
+
+When using external SDKs or libraries that require specific lifecycle management, use `DisposableEffect` to handle initialization and cleanup.
+
+#### Example:
+
+```kotlin
+@Composable
+fun SdkUsageExample(sdk: SomeExternalSdk) {
+    DisposableEffect(key1 = sdk) {
+        sdk.initialize()
+
+        onDispose {
+            sdk.release()
+        }
+    }
+}
+```
+
+## Best Practices
+
+1. **Use for Cleanup Requiring Side Effects**: `DisposableEffect` should be used when there's a clear need for cleanup.
+
+2. **Minimize Key Changes**: Avoid frequent changes to the keys passed to `DisposableEffect` to prevent unnecessary disposals and reinitializations.
+
+3. **Handle All Necessary Cleanup**: Ensure all resources are properly released in the `onDispose` block.
+
+4. **Avoid Business Logic**: `DisposableEffect` should not contain business logic; it should focus on managing side effects.
+
+## Conclusion
+
+`DisposableEffect` in Jetpack Compose is essential for managing side effects that require cleanup,
+ensuring resource efficiency and preventing memory leaks.
+By understanding and correctly implementing `DisposableEffect`, developers can ensure their composables interact safely and efficiently
+with external resources, listeners, and subscriptions.

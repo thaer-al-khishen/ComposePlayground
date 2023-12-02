@@ -1,0 +1,120 @@
+# Understanding `snapshotFlow` in Jetpack Compose
+
+`snapshotFlow` is a utility in Jetpack Compose that bridges the reactive Compose state system with Kotlin's coroutines and Flow.
+It allows you to observe Compose state changes and emit values to a Flow, enabling you to react to state changes outside the Compose hierarchy,
+such as in a ViewModel or a service.
+
+## Key Characteristics of `snapshotFlow`
+
+1. **State Observation**: It observes Compose state and emits values when the state changes.
+
+2. **Integration with Flow**: Converts state changes into a Flow, making it easy to integrate with other parts of your application that use
+Kotlin coroutines and Flow.
+
+3. **Efficient and Concise**: Only emits values when the observed state changes, making it efficient and reducing unnecessary emissions.
+
+## Use Cases for `snapshotFlow`
+
+### 1. Communicating State Changes to ViewModel
+
+Use `snapshotFlow` to observe state changes in the UI and communicate them to a ViewModel or other architectural layers.
+
+#### Example:
+
+```kotlin
+@Composable
+fun MyComposable(viewModel: MyViewModel) {
+    var text by remember { mutableStateOf("") }
+
+    LaunchedEffect(key1 = text) {
+        snapshotFlow { text }
+            .collect { newText ->
+                viewModel.updateText(newText)
+            }
+    }
+
+    TextField(value = text, onValueChange = { text = it })
+}
+```
+
+### 2. Triggering Side Effects in Response to State Changes
+
+Trigger side effects in response to state changes, especially when these side effects are not suitable to be handled directly within the composable.
+
+#### Example:
+
+```kotlin
+@Composable
+fun LocationComposable(locationProvider: LocationProvider) {
+    var currentLocation by remember { mutableStateOf<Location?>(null) }
+
+    LaunchedEffect(key1 = currentLocation) {
+        snapshotFlow { currentLocation }
+            .filterNotNull()
+            .collect { location ->
+                locationProvider.updateLocation(location)
+            }
+    }
+
+    // UI code to update currentLocation
+}
+```
+
+### 3. Combining Multiple State Changes
+
+Combine multiple state changes and emit values when any of the combined states change.
+
+#### Example:
+
+```kotlin
+@Composable
+fun CombinedStateExample(a: State<Int>, b: State<String>) {
+    LaunchedEffect(key1 = a, key2 = b) {
+        snapshotFlow { a.value to b.value }
+            .collect { (newA, newB) ->
+                // Handle combined state change
+            }
+    }
+}
+```
+
+### 4. Interfacing with External Systems
+
+Interface with external systems or frameworks that are not part of the Compose ecosystem, such as databases, networking, or analytics.
+
+#### Example:
+
+```kotlin
+@Composable
+fun ExternalSystemIntegration(userPreferences: UserPreferences) {
+    var theme by remember { mutableStateOf(Theme.Light) }
+
+    LaunchedEffect(key1 = theme) {
+        snapshotFlow { theme }
+            .collect { newTheme ->
+                userPreferences.setTheme(newTheme)
+            }
+    }
+
+    // UI code to change theme
+}
+```
+
+## Best Practices
+
+1. **Avoid Heavy Computations**: Since `snapshotFlow` can emit values frequently,
+avoid performing heavy computations directly inside the flow collection.
+
+2. **Combine with Coroutines**: Use `snapshotFlow` in combination with `LaunchedEffect` or other coroutine builders for asynchronous operations.
+
+3. **Handle State Changes Appropriately**: Ensure that the state changes observed by `snapshotFlow` are handled appropriately,
+especially when they trigger external side effects.
+
+4. **Use for UI-External Communication**: Leverage `snapshotFlow` primarily for communicating state changes from the UI layer to external layers
+like ViewModels or services.
+
+## Conclusion
+
+`snapshotFlow` in Jetpack Compose is a powerful tool for observing Compose state changes and integrating them with Kotlin's Flow and coroutines.
+It enables efficient and reactive data flow from the Compose UI layer to other parts of the application,
+facilitating a clean separation of concerns and enhancing the overall architecture of your Compose applications.

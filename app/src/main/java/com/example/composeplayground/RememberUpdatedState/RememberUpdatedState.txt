@@ -1,0 +1,123 @@
+# Understanding `rememberUpdatedState` in Jetpack Compose
+
+`rememberUpdatedState` is a function in Jetpack Compose that helps you remember the latest value of a state or a variable across recompositions.
+It's particularly useful when you have a callback or a lambda that captures a value, and you want to ensure
+that it always uses the most recent value.
+
+## Key Characteristics of `rememberUpdatedState`
+
+1. **Captures Latest Value**: It captures and provides the latest value of a variable or state across recompositions.
+
+2. **Useful for Callbacks**: Ideal for use in callbacks or lambdas where you need the most up-to-date value from the composable's scope.
+
+3. **Simple and Lightweight**: It's a straightforward way to keep a value up-to-date without additional overhead or complexity.
+
+## Use Cases for `rememberUpdatedState`
+
+### 1. Updating Callbacks with Latest State
+
+Use `rememberUpdatedState` when you have a callback that needs to access the most recent state or variable value,
+especially when the callback is called from a different scope.
+
+#### Example:
+
+```kotlin
+@Composable
+fun MyComposable(onEvent: (String) -> Unit) {
+    var text by remember { mutableStateOf("Initial") }
+
+    val currentText = rememberUpdatedState(text)
+
+    Button(onClick = { onEvent(currentText.value) }) {
+        Text("Send Text")
+    }
+}
+```
+
+### 2. Interacting with External Sources
+
+When interacting with external sources like ViewModels or services, and you need to pass a callback that uses the latest state.
+
+#### Example:
+
+```kotlin
+@Composable
+fun UserInput(viewModel: UserViewModel) {
+    var input by remember { mutableStateOf("") }
+
+    val currentInput = rememberUpdatedState(input)
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.submitData(currentInput.value)
+    }
+
+    TextField(
+        value = input,
+        onValueChange = { input = it }
+    )
+}
+```
+
+### 3. Handling Asynchronous Operations
+
+In scenarios where you're dealing with asynchronous operations and the result needs the latest state.
+
+#### Example:
+
+```kotlin
+@Composable
+fun AsyncDataLoader() {
+    var data by remember { mutableStateOf("Loading...") }
+    val currentData = rememberUpdatedState(data)
+
+    LaunchedEffect(key1 = Unit) {
+        loadData { newData -> data = newData }
+
+        // Use currentData.value to get the latest data
+    }
+
+    Text(text = currentData.value)
+}
+```
+
+### 4. Event Listeners or Subscriptions
+
+When setting up event listeners or subscriptions that need to access the latest state within their scope.
+
+#### Example:
+
+```kotlin
+@Composable
+fun LocationListener(locationService: LocationService) {
+    var location by remember { mutableStateOf("Unknown") }
+    val currentLocation = rememberUpdatedState(location)
+
+    DisposableEffect(key1 = locationService) {
+        val listener = LocationListener { newLocation ->
+            location = newLocation
+            // Use currentLocation.value to get the latest location
+        }
+        locationService.addListener(listener)
+
+        onDispose {
+            locationService.removeListener(listener)
+        }
+    }
+}
+```
+
+## Best Practices
+
+1. **Use for Capturing Latest State in Callbacks**: It's best used when you need to capture the latest state in a callback or a lambda.
+
+2. **Avoid Overuse**: Only use `rememberUpdatedState` when necessary. Overuse can lead to unnecessary complexity.
+
+3. **Combine with Other Effects**: Often used in combination with `LaunchedEffect` or `DisposableEffect` for asynchronous operations
+or event handling.
+
+## Conclusion
+
+`rememberUpdatedState` in Jetpack Compose is a valuable tool for ensuring that callbacks and event handlers always have access to the latest state.
+ It's particularly useful in asynchronous operations, external interactions, and scenarios where state needs to be captured in a different scope.
+ By using `rememberUpdatedState`, developers can write more reliable and bug-free composables that correctly handle
+ the dynamic nature of state in Compose.

@@ -1,0 +1,108 @@
+# Understanding `SideEffect` in Jetpack Compose
+
+`SideEffect` in Jetpack Compose is a function used to perform side effects that are tied to the composition lifecycle
+but don't necessarily produce a UI. It's a mechanism to execute code that should run after the composition is applied and every time
+the composable is recomposed.
+
+## Key Characteristics of `SideEffect`
+
+1. **Tied to Recomposition**: `SideEffect` is called after every recomposition of the composable it's declared in.
+
+2. **No Cleanup Logic**: Unlike `DisposableEffect`, `SideEffect` doesn't have a built-in cleanup mechanism.
+It's intended for side effects that don't require cleanup.
+
+3. **Useful for External Updates**: Ideal for updating external state or interacting with non-Compose systems in response to recomposition.
+
+## Use Cases for `SideEffect`
+
+### 1. Updating External State
+
+Use `SideEffect` to update external state systems, such as a ViewModel or a service, in response to changes in the composable's state.
+
+#### Example:
+
+```kotlin
+@Composable
+fun UpdateExternalStateExample(viewModel: MyViewModel, userName: String) {
+    SideEffect {
+        // Update external state when userName changes
+        viewModel.updateUserName(userName)
+    }
+
+    // UI code
+}
+```
+
+### 2. Logging and Analytics
+
+Perform logging or send analytics events that need to be triggered upon certain state changes or recompositions.
+
+#### Example:
+
+```kotlin
+@Composable
+fun LoggingExample(user: User) {
+    SideEffect {
+        // Log the user's details on recomposition
+        Log.d("UserDetails", "User: $user")
+    }
+
+    // UI code
+}
+```
+
+### 3. Interacting with Non-Compose Systems
+
+Interact with systems or frameworks outside of Compose, such as setting a value in SharedPreferences or updating a static configuration.
+
+#### Example:
+
+```kotlin
+@Composable
+fun SharedPreferencesExample(preferenceKey: String, value: String) {
+    SideEffect {
+        // Update SharedPreferences when value changes
+        sharedPreferences.edit().putString(preferenceKey, value).apply()
+    }
+
+    // UI code
+}
+```
+
+### 4. Triggering UI-independent Actions
+
+Trigger actions that are not directly producing UI but need to be executed in response to state changes.
+
+#### Example:
+
+```kotlin
+@Composable
+fun TriggerActionExample(isEnabled: Boolean) {
+    SideEffect {
+        if (isEnabled) {
+            // Perform an action when isEnabled is true
+            performAction()
+        }
+    }
+
+    // UI code
+}
+```
+
+## Best Practices
+
+1. **Avoid Heavy Computations**: Since `SideEffect` runs on every recomposition,
+avoid heavy or long-running computations to prevent performance issues.
+
+2. **Prefer Stateful Composables for UI**: Use stateful composables or `LaunchedEffect` for side effects that produce or directly influence the UI.
+
+3. **Use with Caution**: Be cautious with `SideEffect` as it can lead to unexpected behaviors if not used properly, especially in complex UIs.
+
+4. **Combine with Conditionals**: Use conditionals within `SideEffect` to control when the side effect should run, based on state changes.
+
+## Conclusion
+
+`SideEffect` in Jetpack Compose is a specialized tool for executing side effects that are tied to the recomposition of a composable.
+It's particularly useful for updating external systems, logging, and performing actions that are not directly related to the UI.
+Understanding when and how to use `SideEffect` is crucial for writing effective Compose code
+that interacts with the broader application environment.
