@@ -1,0 +1,52 @@
+## Recompositions in Jetpack Compose
+
+Recomposition in Jetpack Compose is the process of redrawing a composable function when the data it depends on changes. It's a fundamental concept that enables the dynamic and responsive UIs that Compose is known for.
+
+### When Do Recompositions Happen?
+
+1. **State Changes**: When a state that a composable reads changes, the composable is recomposed.
+For instance, if a composable reads a `MutableState` or a `StateFlow`, and the value changes, the composable will redraw with the new value.
+
+2. **Propagated Recompositions**: If a parent composable is recomposed, its children will also be recomposed.
+This propagation ensures UI consistency but can lead to unnecessary recompositions if not managed well.
+
+3. **Lifecycle Events**: Recompositions can also be triggered by lifecycle events, such as an activity resuming.
+
+4. **Explicit Requests**: Developers can explicitly request recompositions using `LaunchedEffect`, `rememberUpdatedState`, and similar constructs.
+
+### Best Practices for Dealing with States and Recompositions
+
+1. **Minimize State Observations**: Limit the number of state observations in your composables.
+More state observations mean more triggers for recomposition.
+
+2. **Hoist State Up**: Use state hoisting to move state up to a common ancestor.
+This practice makes your composables more reusable and easier to manage.
+
+3. **Use remember Correctly**: Use `remember` to preserve state across recompositions.
+Misusing `remember` can lead to state loss on recompositions.
+
+4. **Avoid Large Composable Trees in Recompositions**: If a large part of the UI tree is being recomposed frequently,
+consider breaking it down into smaller composables with localized states.
+
+5. **Use Derived State Wisely**: Use derived state (`derivedStateOf`) to create states that depend on other states
+but should only cause recompositions when the resulting value changes.
+
+6. **Leverage Lazy Lists**: For lists, use `LazyColumn` or `LazyRow` to ensure that only visible items are recomposed.
+
+7. **Side Effects Inside Composables**: Handle side effects (like network requests) in lifecycle-aware ways,
+such as using `LaunchedEffect` or ViewModel.
+
+8. **Optimize with Keys**: When using lists or dynamically generated composables,
+use keys (`key` modifier) to help Compose track items individually, reducing unnecessary recompositions.
+
+9. **Understand Composition Local**: Use Composition Local (`CompositionLocalProvider`) carefully for passing data down the tree.
+Overuse can lead to complex code and unnecessary recompositions.
+
+10. **Testing and Analysis**: Regularly test and analyze your composables for unnecessary recompositions, especially in complex UIs.
+Tools like Compose's Preview and the Layout Inspector can be helpful.
+
+### Conclusion
+
+Understanding and optimizing recompositions in Jetpack Compose is crucial for building efficient and performant applications.
+By following best practices for state management and being mindful of how and when recompositions occur,
+you can create smooth and responsive UIs that make the best use of Compose's reactive nature.
