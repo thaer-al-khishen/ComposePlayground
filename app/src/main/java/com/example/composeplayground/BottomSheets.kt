@@ -64,7 +64,7 @@ fun DisplayMaterial3BottomSheetWithBottomSheetScaffold() {
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DisplayMaterial3ModalBottomSheet() {
     Surface(
@@ -91,6 +91,7 @@ fun DisplayMaterial3ModalBottomSheet() {
                 onDismissRequest = {
                     isSheetOpen = false
                 },
+//                dragHandle = {}   //Use this to remove the drag handle at the top and make the content stick to the top of the sheet
             ) {
                 Box(
                     modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center
