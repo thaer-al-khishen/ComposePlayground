@@ -10,11 +10,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -27,13 +29,14 @@ fun BundleArgumentsNavigation() {
 
     NavHost(navController = navController, startDestination = "ScreenA") {
         composable("ScreenA") {
-            ScreenA { sharedObject ->
-                navController.navigateWithArgument("ScreenB", "sharedObject", sharedObject)
+            ScreenA { screenAOutput ->
+                val screenBData = ScreenBData(screenAOutput.url)
+                navController.navigateWith(ScreenInput.ScreenBInput(screenBData))
             }
         }
-        composable("ScreenB") {
-            val sharedObject: SharedObject = navController.getArgument("sharedObject") ?: SharedObject("")
-            ScreenB(sharedObject) {
+        composable(ScreenBData.SCREEN_B_DESTINATION) {
+            val screenBData: ScreenBData = navController.getInput(ScreenBData.SCREEN_B_KEY) ?: ScreenBData("")
+            ScreenB(screenBData) {
                 navController.navigate("ScreenA")
             }
         }
@@ -41,12 +44,15 @@ fun BundleArgumentsNavigation() {
 }
 
 @Composable
-fun ScreenA(onButtonClicked: (SharedObject) -> Unit) {
-    val sharedObject = SharedObject(url = "https://example.com")
+fun ScreenA(onButtonClicked: (ScreenAOutput) -> Unit) {
+
+    val screenAOutput by remember {
+        mutableStateOf(ScreenAOutput(url = "https://example.com"))
+    }
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Button(onClick = {
-            onButtonClicked(sharedObject)
+            onButtonClicked(screenAOutput)
         }) {
             Text("Go to Screen B")
         }
@@ -55,14 +61,18 @@ fun ScreenA(onButtonClicked: (SharedObject) -> Unit) {
 }
 
 @Composable
-fun ScreenB(sharedObject: SharedObject, onButtonClicked: () -> Unit) {
+fun ScreenB(screenBData: ScreenBData, onButtonClicked: () -> Unit) {
+
+    val url by remember {
+        mutableStateOf(screenBData.url)
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("URL: ${sharedObject.url ?: "No URL"}")
+        Text("URL: $url")
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
             onButtonClicked.invoke()
@@ -73,20 +83,38 @@ fun ScreenB(sharedObject: SharedObject, onButtonClicked: () -> Unit) {
 
 }
 
-private fun <T> NavHostController.navigateWithArgument(destination: String, key: String, data: T) {
-    this.currentBackStackEntry?.savedStateHandle?.apply {
-        set(key, data)
+data class ScreenAOutput(
+    val url: String
+)
+
+@Parcelize
+data class ScreenBData(
+    val url: String
+) : Parcelable {
+    companion object {
+        const val SCREEN_B_DESTINATION = "SCREEN_B_DESTINATION"
+        const val SCREEN_B_KEY = "SCREEN_B_KEY"
     }
-    this.navigate(destination)
 }
 
-private fun <T> NavHostController.getArgument(key: String): T? {
+sealed class ScreenInput<T>(val destination: String, val key: String, open val data: T) {
+    data class ScreenBInput(override val data: ScreenBData) :
+        ScreenInput<ScreenBData>(
+            ScreenBData.SCREEN_B_DESTINATION,
+            ScreenBData.SCREEN_B_KEY,
+            data
+        )
+}
+
+private fun <T> NavHostController.navigateWith(screenInput: ScreenInput<T>) {
+    this.currentBackStackEntry?.savedStateHandle?.apply {
+        set(screenInput.key, screenInput.data)
+    }
+    this.navigate(screenInput.destination)
+}
+
+fun <T> NavController.getInput(key: String): T? {
     return this.previousBackStackEntry?.savedStateHandle?.get<T>(
         key
     )
 }
-
-@Parcelize
-data class SharedObject(
-    val url: String
-) : Parcelable
